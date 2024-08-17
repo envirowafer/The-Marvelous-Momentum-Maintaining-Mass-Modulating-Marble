@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://buweoqqp5b4mc"]
+
+[ext_resource type="PackedScene" uid="uid://b14ggju702vd0" path="res://ball.tscn" id="1_tifik"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hxabk"]
+
+[sub_resource type="Gradient" id="Gradient_o3otu"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mlim2"]
+gradient = SubResource("Gradient_o3otu")
+
+[node name="Test" type="Node2D"]
+
+[node name="Ball" parent="." instance=ExtResource("1_tifik")]
+position = Vector2(935, 350)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(943, 844)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_hxabk")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0, 34)
+texture = SubResource("GradientTexture2D_mlim2")
+
+[node name="Ball2" parent="." instance=ExtResource("1_tifik")]
+position = Vector2(683, 351)
