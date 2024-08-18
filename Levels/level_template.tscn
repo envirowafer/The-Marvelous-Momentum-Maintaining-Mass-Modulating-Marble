@@ -1,8 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4mpc1yuchj14"]
+[gd_scene load_steps=6 format=4 uid="uid://c4mpc1yuchj14"]
 
-[sub_resource type="TileSet" id="TileSet_cb7aj"]
+[ext_resource type="Script" path="res://Levels/level_template.gd" id="1_4whpf"]
+[ext_resource type="TileSet" uid="uid://cu6a4ysqhdirc" path="res://Levels/placeholder_tilemap.tres" id="1_f06cq"]
+[ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_m58v8"]
 
-[node name="Level Template" type="Node2D"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mrh1f"]
+distance = -1280.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_6xya2"]
+font_size = 180
+font_color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Level Template" type="Node2D" groups=["Level Root"]]
+script = ExtResource("1_4whpf")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_set = SubResource("TileSet_cb7aj")
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAfAAEAAAAAAAAAAAAfAAIAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAUAAAAAAAAAAAAfAAsAAAAAAAAAAAAfAAwAAAAAAAAAAAAfAA0AAAAAAAAAAAAfAA4AAAAAAAAAAAAfAA8AAAAAAAAAAAAfABAAAAAAAAAAAAAfABEAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAoAAAAAAAAAAAAfAAgAAQAAAAAAAQA=")
+tile_set = ExtResource("1_f06cq")
+
+[node name="Launcher" parent="." instance=ExtResource("2_m58v8")]
+position = Vector2(357, 825)
+launch_impulse_magnitude = 1700.0
+
+[node name="Killzone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("WorldBoundaryShape2D_mrh1f")
+
+[node name="Win Label" type="Label" parent="."]
+z_index = -1
+offset_right = 1922.0
+offset_bottom = 1081.0
+text = "You Win!"
+label_settings = SubResource("LabelSettings_6xya2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]

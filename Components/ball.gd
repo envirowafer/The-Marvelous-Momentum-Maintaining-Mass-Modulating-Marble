@@ -117,7 +117,6 @@ func _draw():
 			var b = simulated_velocity/combined_damp - gravity_vector/(combined_damp**2)
 			var c = t * gravity_vector / combined_damp
 			var delta_x = a*b + c
-			print(delta_x)
 			
 			# compute remaining values needed
 			var draw_radius = DOT_RADIUS * (DOT_TIME_SEPARATION+1) / (t+1)
@@ -160,5 +159,9 @@ func _integrate_forces(_state):
 	# if the parent launcher has queued a launch, then
 	# launch the ball and unqueue the launch
 	if launch_queued:
+		linear_velocity = Vector2.ZERO
+		position = Vector2.ZERO
+		angular_velocity = 0
+		rotation = 0
 		apply_impulse(launch_impulse)
 		launch_queued = false
