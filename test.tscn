@@ -1,28 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://buweoqqp5b4mc"]
+[gd_scene load_steps=4 format=3 uid="uid://buweoqqp5b4mc"]
 
-[ext_resource type="PackedScene" uid="uid://b14ggju702vd0" path="res://ball.tscn" id="1_tifik"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hxabk"]
-
-[sub_resource type="Gradient" id="Gradient_o3otu"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mlim2"]
-gradient = SubResource("Gradient_o3otu")
+[ext_resource type="Script" path="res://test.gd" id="1_72fo3"]
+[ext_resource type="PackedScene" uid="uid://b14ggju702vd0" path="res://Components/ball.tscn" id="1_tifik"]
+[ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="3_a6b0v"]
 
 [node name="Test" type="Node2D"]
+script = ExtResource("1_72fo3")
+impulse_magnitude = 1000.0
 
 [node name="Ball" parent="." instance=ExtResource("1_tifik")]
-position = Vector2(935, 350)
+visible = false
+position = Vector2(331, 681)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(943, 844)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("WorldBoundaryShape2D_hxabk")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(0, 34)
-texture = SubResource("GradientTexture2D_mlim2")
-
-[node name="Ball2" parent="." instance=ExtResource("1_tifik")]
-position = Vector2(683, 351)
+[node name="Launcher" parent="." instance=ExtResource("3_a6b0v")]
+position = Vector2(193, 804)
+rotation = 0.546288
