@@ -6,7 +6,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_b1dav"]
 font_size = 70
-font_color = Color(0.2, 0.2, 0.2, 1)
+font_color = Color(0.858824, 0.768627, 0.611765, 1)
 
 [node name="Level 3" type="Node2D"]
 

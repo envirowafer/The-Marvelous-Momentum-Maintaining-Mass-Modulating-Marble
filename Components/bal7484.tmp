@@ -17,6 +17,7 @@ contact_monitor = true
 max_contacts_reported = 5
 linear_damp = 0.1
 script = ExtResource("1_i81jf")
+trajectory_hint = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3ee6x")

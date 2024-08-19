@@ -3,14 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_04n7q"]
 [ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_vbtgm"]
 [ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_xhqyu"]
+[ext_resource type="LabelSettings" uid="uid://bkkxfhtrta6oc" path="res://Levels/default_label_settings.tres" id="4_b7qbt"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_swrva"]
+[sub_resource type="LabelSettings" id="LabelSettings_ml8hw"]
 font_size = 30
-font_color = Color(0.2, 0.2, 0.2, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_nml4n"]
-font_size = 50
-font_color = Color(0.2, 0.2, 0.2, 1)
+font_color = Color(0.858824, 0.768627, 0.611765, 1)
 
 [node name="Level 1" type="Node2D"]
 
@@ -38,21 +35,21 @@ offset_right = 713.0
 offset_bottom = 1049.0
 text = "Press Space or
 Click to launch."
-label_settings = SubResource("LabelSettings_swrva")
+label_settings = SubResource("LabelSettings_ml8hw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="Text"]
 layout_mode = 0
-offset_left = 622.0
-offset_top = 413.0
-offset_right = 1315.0
-offset_bottom = 698.0
+offset_left = 557.0
+offset_top = 393.0
+offset_right = 1389.0
+offset_bottom = 734.0
 text = "Changing size changes mass.
 
 Adjust your weight to
 reach the goal."
-label_settings = SubResource("LabelSettings_nml4n")
+label_settings = ExtResource("4_b7qbt")
 horizontal_alignment = 1
 vertical_alignment = 1
 

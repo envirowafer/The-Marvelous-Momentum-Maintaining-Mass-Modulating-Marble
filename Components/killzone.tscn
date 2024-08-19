@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Components/killzone.gd" id="1_kot63"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qe45n"]
+resource_local_to_scene = true
 distance = -1280.0
 
 [node name="Killzone" type="Area2D"]

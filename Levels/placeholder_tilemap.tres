@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=9 format=3 uid="uid://cu6a4ysqhdirc"]
 
-[ext_resource type="Texture2D" uid="uid://byl1lqt3u2dcl" path="res://Levels/placeholder tile.png" id="1_x3hsd"]
+[ext_resource type="Texture2D" uid="uid://b5mu8510s5bsk" path="res://mid-wood-texture.tres" id="1_5431h"]
 [ext_resource type="PackedScene" uid="uid://cyrvodmhlcrm2" path="res://Components/exit.tscn" id="2_juv0l"]
 [ext_resource type="PackedScene" uid="uid://c7vtacmi7siag" path="res://Components/exit_up.tscn" id="3_xxb6v"]
 [ext_resource type="PackedScene" uid="uid://bl17gi2788ao5" path="res://Components/kill_tile.tscn" id="4_0lmpa"]
@@ -11,7 +11,7 @@ bounce = 0.4
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mikqu"]
 resource_name = "wall"
-texture = ExtResource("1_x3hsd")
+texture = ExtResource("1_5431h")
 texture_region_size = Vector2i(60, 60)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-30, -30, 30, -30, 30, 30, -30, 30)

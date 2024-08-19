@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=4 uid="uid://blnnhhig88b1e"]
+
+[ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_4pxc6"]
+[ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_42fpy"]
+[ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_e8r32"]
+[ext_resource type="PackedScene" uid="uid://cm5pdcoc6ugrm" path="res://Components/bounce_pad.tscn" id="4_mm51m"]
+
+[sub_resource type="Gradient" id="Gradient_d54sy"]
+colors = PackedColorArray(0.431373, 0.137255, 0.129412, 1, 0.431373, 0.137255, 0.129412, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hf5sm"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_d54sy")
+width = 200
+height = 50
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awidu"]
+resource_local_to_scene = true
+size = Vector2(200, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1lkf"]
+size = Vector2(200, 1494)
+
+[node name="Level 9 plus" type="Node2D"]
+
+[node name="Killzone" parent="." instance=ExtResource("1_4pxc6")]
+
+[node name="Launcher" parent="." instance=ExtResource("2_42fpy")]
+position = Vector2(277, 841)
+rotation = 0.349066
+launch_impulse_magnitude = 2000.0
+
+[node name="TileMapLayer" parent="." instance=ExtResource("3_e8r32")]
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAQAfAAAAAgAAAAAAAQAeAAAAAgAAAAAAAQAdAAAAAgAAAAAAAQAcAAAAAgAAAAAAAQAbAAAAAgAAAAAAAQAaAAAAAgAAAAAAAQAZAAAAAgAAAAAAAQAYAAAAAgAAAAAAAQAXAAAAAgAAAAAAAQAWAAAAAgAAAAAAAQAVAAAAAgAAAAAAAQAUAAAAAgAAAAAAAQATAAAAAgAAAAAAAQASAAAAAgAAAAAAAQARAAAAAgAAAAAAAQAQAAAAAgAAAAAAAQAPAAAAAgAAAAAAAQAOAAAAAgAAAAAAAQANAAAAAgAAAAAAAQAMAAAAAgAAAAAAAQALAAAAAgAAAAAAAQAKAAAAAgAAAAAAAQAJAAAAAgAAAAAAAQAIAAAAAgAAAAAAAQAHAAAAAgAAAAAAAQAGAAAAAgAAAAAAAQAFAAAAAgAAAAAAAQAEAAAAAgAAAAAAAQADAAAAAgAAAAAAAQACAAAAAgAAAAAAAQABAAAAAgAAAAAAAQAfABEAAgAAAAAAAQAJABEAAgAAAAAAAQAJABAAAgAAAAAAAQAJAA8AAgAAAAAAAQAJAA4AAgAAAAAAAQAJAA0AAgAAAAAAAQAJAAwAAgAAAAAAAQAJAAsAAgAAAAAAAQAJAAoAAgAAAAAAAQAJAAkAAgAAAAAAAQAJAAgAAgAAAAAAAQAJAAcAAgAAAAAAAQARAAEAAgAAAAAAAQARAAIAAgAAAAAAAQARAAMAAgAAAAAAAQARAAQAAgAAAAAAAQARAAUAAgAAAAAAAQARAAYAAgAAAAAAAQARAAcAAgAAAAAAAQARAAgAAgAAAAAAAQARAAkAAgAAAAAAAQAYABEAAgAAAAAAAQAYABAAAgAAAAAAAQAYAA8AAgAAAAAAAQAYAA4AAgAAAAAAAQAYAA0AAgAAAAAAAQAYAAwAAgAAAAAAAQAYAAsAAgAAAAAAAQAYAAoAAgAAAAAAAQAYAAkAAgAAAAAAAQAYAAgAAgAAAAAAAQAYAAcAAgAAAAAAAQAYAAYAAgAAAAAAAQAeABEAAgAAAAAAAQAdABEAAgAAAAAAAQAZABEAAgAAAAAAAQAbABEAAQAAAAAAAgA=")
+
+[node name="Bounce Pad" parent="." instance=ExtResource("4_mm51m")]
+position = Vector2(571, 100)
+
+[node name="Sprite2D" parent="Bounce Pad" index="0"]
+texture = SubResource("GradientTexture2D_hf5sm")
+
+[node name="CollisionShape2D" parent="Bounce Pad" index="1"]
+shape = SubResource("RectangleShape2D_awidu")
+
+[node name="Bounce Pad2" parent="." instance=ExtResource("4_mm51m")]
+position = Vector2(1054, 1028)
+
+[node name="Sprite2D" parent="Bounce Pad2" index="0"]
+texture = SubResource("GradientTexture2D_hf5sm")
+
+[node name="CollisionShape2D" parent="Bounce Pad2" index="1"]
+shape = SubResource("RectangleShape2D_awidu")
+
+[node name="Bounce Pad3" parent="." instance=ExtResource("4_mm51m")]
+position = Vector2(1469, 106)
+
+[node name="Sprite2D" parent="Bounce Pad3" index="0"]
+texture = SubResource("GradientTexture2D_hf5sm")
+
+[node name="CollisionShape2D" parent="Bounce Pad3" index="1"]
+shape = SubResource("RectangleShape2D_awidu")
+
+[node name="Killzone2" parent="." instance=ExtResource("1_4pxc6")]
+
+[node name="CollisionShape2D" parent="Killzone2" index="0"]
+position = Vector2(-245, 526)
+shape = SubResource("RectangleShape2D_n1lkf")
+
+[node name="Killzone3" parent="." instance=ExtResource("1_4pxc6")]
+
+[node name="CollisionShape2D" parent="Killzone3" index="0"]
+position = Vector2(2167, 553)
+shape = SubResource("RectangleShape2D_n1lkf")
+
+[connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]
+
+[editable path="Bounce Pad"]
+[editable path="Bounce Pad2"]
+[editable path="Bounce Pad3"]
+[editable path="Killzone2"]
+[editable path="Killzone3"]

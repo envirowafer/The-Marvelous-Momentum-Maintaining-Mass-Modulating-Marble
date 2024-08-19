@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://7rmtf8ddg1q3"]
+[gd_scene load_steps=7 format=4 uid="uid://7rmtf8ddg1q3"]
 
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_i8jjl"]
 [ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_4sk6o"]
@@ -6,7 +6,14 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ns30t"]
 font_size = 70
-font_color = Color(0.2, 0.2, 0.2, 1)
+font_color = Color(0.858824, 0.768627, 0.611765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ardj4"]
+font_size = 30
+font_color = Color(0.858824, 0.768627, 0.611765, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sr1x"]
+size = Vector2(200, 1423)
 
 [node name="Level 2" type="Node2D"]
 
@@ -33,12 +40,30 @@ offset_top = 63.0
 offset_right = 1912.0
 offset_bottom = 1005.0
 text = "Mass changes conserve
-momentum.
+momentum, but not speed.
 
-Gaining mass slows
-you down."
+Change mass mid-air
+to change trajectory."
 label_settings = SubResource("LabelSettings_ns30t")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 947.0
+offset_right = 596.0
+offset_bottom = 989.0
+text = "Press R to Restart
+"
+label_settings = SubResource("LabelSettings_ardj4")
+
+[node name="Killzone2" parent="." instance=ExtResource("1_i8jjl")]
+
+[node name="CollisionShape2D" parent="Killzone2" index="0"]
+position = Vector2(2131, 713.5)
+shape = SubResource("RectangleShape2D_4sr1x")
+
 [connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]
+
+[editable path="Killzone2"]

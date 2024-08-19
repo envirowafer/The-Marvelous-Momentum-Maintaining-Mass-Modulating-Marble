@@ -3,10 +3,14 @@
 
 <svg
    width="100"
-   height="100"
-   viewBox="0 0 100 100"
+   height="200"
+   viewBox="0 0 100 200"
    version="1.1"
    id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="launcher.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -14,6 +18,46 @@
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs1" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.3"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="30.557114"
+     inkscape:cy="110.86424"
+     inkscape:document-units="px"
+     inkscape:showpageshadow="true"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     borderlayer="true"
+     showborder="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1"
+     showgrid="false">
+    <inkscape:grid
+       id="grid6"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="false" />
+  </sodipodi:namedview>
   <metadata
      id="metadata1">
     <rdf:RDF>
@@ -26,7 +70,7 @@
     </rdf:RDF>
   </metadata>
   <rect
-     style="fill:#5599ff"
+     style="fill:#b38147;fill-opacity:1"
      id="rect1"
      width="10"
      height="100"
@@ -34,7 +78,7 @@
      y="0"
      rx="5" />
   <rect
-     style="fill:#5599ff"
+     style="fill:#b38147;fill-opacity:1"
      id="rect2"
      width="10"
      height="100"
@@ -42,13 +86,12 @@
      y="0"
      rx="5" />
   <rect
-     style="fill:#5599ff"
+     style="fill:#b38147;fill-opacity:1"
      id="rect3"
-     width="10"
+     width="20"
      height="100"
-     x="-100"
+     x="-110"
      y="0"
-     rx="5"
      transform="rotate(-90)" />
   <g
      id="g5"
@@ -63,10 +106,42 @@
   </g>
   <path
      id="rect4"
-     style="fill:#5599ff;fill-opacity:1"
-     d="M 5 85 L 5 95 L 15 95 L 15 90 A 5 5 0 0 1 10 85 L 5 85 z " />
+     style="fill:#b38147;fill-opacity:1"
+     d="M 5,85 V 95 H 15 V 90 A 5,5 0 0 1 10,85 Z" />
   <path
      id="path8"
-     style="fill:#5599ff;fill-opacity:1"
+     style="fill:#b38147;fill-opacity:1"
      d="M 95,85 V 95 H 85 v -5 a 5,5 0 0 0 5,-5 z" />
+  <rect
+     style="fill:#b38147;fill-opacity:1"
+     id="rect6"
+     width="100"
+     height="100"
+     x="0"
+     y="100.0051"
+     rx="5" />
+  <circle
+     style="fill:#a5a5a5;fill-opacity:1"
+     id="path6"
+     cx="5"
+     cy="5"
+     r="4" />
+  <circle
+     style="fill:#a5a5a5;fill-opacity:1"
+     id="circle6"
+     cx="95"
+     cy="5"
+     r="4" />
+  <circle
+     style="fill:#a5a5a5;fill-opacity:1"
+     id="circle7"
+     cx="95"
+     cy="195"
+     r="4" />
+  <circle
+     style="fill:#a5a5a5;fill-opacity:1"
+     id="circle8"
+     cx="5"
+     cy="195"
+     r="4" />
 </svg>

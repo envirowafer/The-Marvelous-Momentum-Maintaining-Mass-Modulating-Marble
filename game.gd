@@ -16,13 +16,14 @@ const LEVEL_6 = preload("res://Levels/level_6.tscn")
 const LEVEL_7 = preload("res://Levels/level_7.tscn")
 const LEVEL_8 = preload("res://Levels/level_8.tscn")
 const LEVEL_9 = preload("res://Levels/level_9.tscn")
+const LEVEL_9_PLUS = preload("res://Levels/level_9_plus.tscn")
 const WIN_SCREEN = preload("res://Levels/win_screen.tscn")
 
 
 # place level scenes into an array
 var level_array = [
 	LEVEL_0, LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5,
-	LEVEL_6, LEVEL_7, LEVEL_8, LEVEL_9, WIN_SCREEN
+	LEVEL_6, LEVEL_7, LEVEL_8, LEVEL_9, LEVEL_9_PLUS, WIN_SCREEN
 ]
 
 # initialize variable to keep track of current level in the level array

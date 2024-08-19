@@ -9,7 +9,7 @@ distance = -1280.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_6xya2"]
 font_size = 180
-font_color = Color(0.2, 0.2, 0.2, 1)
+font_color = Color(0.858824, 0.768627, 0.611765, 1)
 
 [node name="Level Example" type="Node2D" groups=["Level Root"]]
 script = ExtResource("1_mcbhu")

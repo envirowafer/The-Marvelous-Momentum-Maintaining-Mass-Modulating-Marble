@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyrvodmhlcrm2"]
 
-[ext_resource type="Texture2D" uid="uid://dl3075xc6dfjh" path="res://Components/exit.svg" id="1_vu2ie"]
 [ext_resource type="Script" path="res://Components/area_2d.gd" id="1_xk8e3"]
+[ext_resource type="Texture2D" uid="uid://c4et6htm5wqxt" path="res://Components/exit_wooden.svg" id="2_u8ait"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtfwv"]
 size = Vector2(180, 180)
@@ -16,6 +16,6 @@ position = Vector2(60, 0)
 shape = SubResource("RectangleShape2D_mtfwv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_vu2ie")
+texture = ExtResource("2_u8ait")
 
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

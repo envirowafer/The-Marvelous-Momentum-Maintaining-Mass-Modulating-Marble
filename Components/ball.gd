@@ -2,6 +2,10 @@ extends RigidBody2D
 
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+
+var ball_color = Color(0.75, 0.65, 0.65)
 
 
 # settings for trajectory hint
@@ -101,7 +105,7 @@ func _ready():
 # draw a custom sprite that scales with the radius
 func _draw():
 	# draw filled circle
-	draw_circle(Vector2.ZERO, radius, Color.WHITE_SMOKE)
+	draw_circle(Vector2.ZERO, radius, ball_color)
 	
 	# draw the trajectory hint if it is enabled
 	if input_enabled and trajectory_hint:
@@ -180,3 +184,15 @@ func _integrate_forces(_state):
 		rotation = 0
 		apply_impulse(launch_impulse)
 		launch_queued = false
+
+
+# play sound effect when colliding with stuff
+func _on_body_entered(_body: Node) -> void:
+	var speed = linear_velocity.length()
+	if speed < 100:
+		return
+	var volume = 60 * (log(speed)/log(1000) - 1)
+	var pitch_scale = 0.7 - 0.5 * ((mass - radius_to_mass(MIN_RADIUS))/(radius_to_mass(MAX_RADIUS) - radius_to_mass(MIN_RADIUS)) - 0.5)
+	audio_stream_player_2d.volume_db = clamp(volume, -30, 0)
+	audio_stream_player_2d.pitch_scale = pitch_scale
+	audio_stream_player_2d.play()

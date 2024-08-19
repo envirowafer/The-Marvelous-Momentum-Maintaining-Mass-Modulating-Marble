@@ -2,6 +2,10 @@ extends Node2D
 
 
 @export_range(0,2000) var launch_impulse_magnitude = 1000.0
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var area_2d: Area2D = $Area2D
+@onready var launch_cooldown: Timer = $"Launch Cooldown"
+var can_launch = true
 
 
 @onready var ball: RigidBody2D = $Ball
@@ -31,11 +35,28 @@ func _ready():
 # launch the ball when the player does the launch action
 func _input(event: InputEvent):
 	if input_enabled and event.is_action_pressed("activate_launcher"):
+		if not can_launch:
+			return
+		
+		can_launch = false
+		launch_cooldown.start()
+		
 		if is_instance_valid(ball) and ball.freeze:
 			ball.freeze = false
 			ball.launch_queued = true
+			audio_stream_player_2d.play()
+		
+		# launch everything in here that is not the ball
+		var overlapping_bodies = area_2d.get_overlapping_bodies()
+		for body in overlapping_bodies:
+			if (body != self) and (not body.freeze):
+				body.apply_impulse(global_launch_impulse)
 
 
 # teleport the ball back to the launcher
 func reset_ball():
 	ball.reset_ball()
+
+
+func _on_launch_cooldown_timeout() -> void:
+	can_launch = true
