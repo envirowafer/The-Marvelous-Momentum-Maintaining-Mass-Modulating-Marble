@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b14ggju702vd0"]
+[gd_scene load_steps=7 format=3 uid="uid://b14ggju702vd0"]
 
 [ext_resource type="Script" path="res://Components/ball.gd" id="1_i81jf"]
 [ext_resource type="AudioStream" uid="uid://kfc7dwtrllds" path="res://Components/wall_hit_sound.wav" id="2_ya81w"]
+[ext_resource type="AudioStream" uid="uid://c1cqdxu1c3nfe" path="res://Components/458137__neatoent__ball-on-table_roll_clip.wav" id="3_0wvsq"]
+[ext_resource type="AudioStream" uid="uid://bwp5wdh3d3yj7" path="res://Components/458137__neatoent__ball-on-table_fall_clip.wav" id="4_vip25"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mc3an"]
 friction = 0.1
@@ -11,6 +13,7 @@ bounce = 0.4
 radius = 20.0
 
 [node name="Ball" type="RigidBody2D"]
+z_index = 1
 physics_material_override = SubResource("PhysicsMaterial_mc3an")
 can_sleep = false
 contact_monitor = true
@@ -21,10 +24,21 @@ script = ExtResource("1_i81jf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3ee6x")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Bounce" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("2_ya81w")
 pitch_scale = 1.3
 attenuation = 0.0167465
 bus = &"SFX"
 
+[node name="Roll" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("3_0wvsq")
+bus = &"SFX"
+
+[node name="Fall" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("4_vip25")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="finished" from="Sounds/Roll" to="." method="_on_roll_finished"]

@@ -2,7 +2,19 @@ extends RigidBody2D
 
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var bounce_sound: AudioStreamPlayer2D = $Sounds/Bounce
+@onready var roll_sound: AudioStreamPlayer2D = $Sounds/Roll
+@onready var fall_sound: AudioStreamPlayer2D = $Sounds/Fall
+
+
+
+var play_roll_sound = false:
+	set(value):
+		play_roll_sound = value
+		if roll_sound.playing:
+			roll_sound.stream_paused = not value
+		elif value == true:
+			roll_sound.play()
 
 
 var ball_color = Color(0.75, 0.65, 0.65)
@@ -43,6 +55,12 @@ var launch_queued = false
 var input_enabled = true
 
 
+# called by kill tiles when the ball falls into them
+func fall():
+	fall_sound.play()
+	reset_ball()
+
+
 # teleport the ball back to the launcher
 func reset_ball():
 	if is_child_of_launcher:
@@ -51,6 +69,7 @@ func reset_ball():
 		angular_velocity = 0
 		rotation = 0
 		freeze = true
+		play_roll_sound = false
 
 
 # settings for mouse control of radius
@@ -158,6 +177,13 @@ func _process(delta: float):
 	# update the radius if frozen
 	if freeze and radius != target_radius:
 		radius = move_toward(radius, target_radius, MAX_RADIUS_DELTA)
+	
+	# customize the parameters of the roll sound to fit the ball
+	var speed = linear_velocity.length()
+	var volume = 60 * (log(speed)/log(1000) - 1.1)
+	roll_sound.volume_db = clamp(volume, -60, 0)
+	var pitch_scale = 1 - 0.05 * ((mass - radius_to_mass(MIN_RADIUS))/(radius_to_mass(MAX_RADIUS) - radius_to_mass(MIN_RADIUS)) - 0.5)
+	roll_sound.pitch_scale = pitch_scale
 
 
 # use mouse input to change the target radius
@@ -193,6 +219,16 @@ func _on_body_entered(_body: Node) -> void:
 		return
 	var volume = 60 * (log(speed)/log(1000) - 1)
 	var pitch_scale = 0.7 - 0.5 * ((mass - radius_to_mass(MIN_RADIUS))/(radius_to_mass(MAX_RADIUS) - radius_to_mass(MIN_RADIUS)) - 0.5)
-	audio_stream_player_2d.volume_db = clamp(volume, -30, 0)
-	audio_stream_player_2d.pitch_scale = pitch_scale
-	audio_stream_player_2d.play()
+	bounce_sound.volume_db = clamp(volume, -30, 0)
+	bounce_sound.pitch_scale = pitch_scale
+	bounce_sound.play()
+
+
+# loop the audio when it is done
+func _on_roll_finished() -> void:
+	roll_sound.play()
+
+
+# stop the sound when leaving the tree
+func _on_tree_exiting() -> void:
+	roll_sound.stop()

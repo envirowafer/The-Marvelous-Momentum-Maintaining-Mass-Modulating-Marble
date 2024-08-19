@@ -6,10 +6,12 @@
 size = Vector2(60, 60)
 
 [sub_resource type="Gradient" id="Gradient_ise3t"]
-colors = PackedColorArray(0.141176, 0.14902, 0.227451, 1, 0.141176, 0.14902, 0.227451, 1)
+colors = PackedColorArray(0.21, 0.1743, 0.18858, 1, 0.21, 0.1743, 0.18858, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_1xs32"]
 gradient = SubResource("Gradient_ise3t")
+width = 60
+height = 60
 
 [node name="Kill Tile" type="Area2D"]
 script = ExtResource("1_u2s3m")

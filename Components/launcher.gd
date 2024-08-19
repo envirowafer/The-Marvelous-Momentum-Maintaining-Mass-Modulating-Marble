@@ -28,6 +28,7 @@ var input_enabled = true:
 func _ready():
 	# share variables with child ball
 	ball.is_child_of_launcher = true
+	ball.play_roll_sound = false
 	ball.launch_impulse = global_launch_impulse
 	ball.freeze = true
 
@@ -44,6 +45,7 @@ func _input(event: InputEvent):
 		if is_instance_valid(ball) and ball.freeze:
 			ball.freeze = false
 			ball.launch_queued = true
+			ball.play_roll_sound = true
 			audio_stream_player_2d.play()
 		
 		# launch everything in here that is not the ball
@@ -58,5 +60,6 @@ func reset_ball():
 	ball.reset_ball()
 
 
+# allow launching when cooldown is up
 func _on_launch_cooldown_timeout() -> void:
 	can_launch = true
