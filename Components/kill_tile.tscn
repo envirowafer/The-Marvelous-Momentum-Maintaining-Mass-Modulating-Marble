@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl17gi2788ao5"]
+
+[ext_resource type="Texture2D" uid="uid://blrdqy5jge5t5" path="res://Components/obstacle placeholder tile.png" id="1_2qmfa"]
+[ext_resource type="Script" path="res://Components/kill_tile.gd" id="1_u2s3m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0yte"]
+size = Vector2(60, 60)
+
+[node name="Kill Tile" type="Area2D"]
+script = ExtResource("1_u2s3m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x0yte")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2qmfa")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

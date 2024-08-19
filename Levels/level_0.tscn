@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp43ktyx6oivd"]
+
+[ext_resource type="Script" path="res://Levels/level_0.gd" id="1_i1w0g"]
+[ext_resource type="PackedScene" uid="uid://b14ggju702vd0" path="res://Components/ball.tscn" id="2_8dim5"]
+[ext_resource type="Texture2D" uid="uid://byl1lqt3u2dcl" path="res://Levels/placeholder tile.png" id="2_bnp3x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1d70k"]
+size = Vector2(480, 360)
+
+[sub_resource type="LabelSettings" id="LabelSettings_06o8t"]
+font_size = 90
+font_color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Level 0" type="Node2D"]
+script = ExtResource("1_i1w0g")
+
+[node name="Ball" parent="." instance=ExtResource("2_8dim5")]
+position = Vector2(960, 700)
+trajectory_hint = false
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(960, 900)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+shape = SubResource("RectangleShape2D_1d70k")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform"]
+scale = Vector2(8, 6)
+texture = ExtResource("2_bnp3x")
+
+[node name="Label" type="Label" parent="."]
+z_index = -1
+offset_right = 1925.0
+offset_bottom = 721.0
+text = "Move the Mouse to change the ball's size.
+
+Press Space or Left Click to continue."
+label_settings = SubResource("LabelSettings_06o8t")
+horizontal_alignment = 1
+vertical_alignment = 1

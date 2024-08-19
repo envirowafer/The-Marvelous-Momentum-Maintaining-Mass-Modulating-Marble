@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=4 uid="uid://bbayfof7nalwp"]
+
+[ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_04n7q"]
+[ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_vbtgm"]
+[ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_xhqyu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_swrva"]
+font_size = 30
+font_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nml4n"]
+font_size = 50
+font_color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Level 1" type="Node2D"]
+
+[node name="Killzone" parent="." instance=ExtResource("1_04n7q")]
+
+[node name="Launcher" parent="." instance=ExtResource("2_vbtgm")]
+position = Vector2(323, 866)
+launch_impulse_magnitude = 1700.0
+
+[node name="TileMapLayer" parent="." instance=ExtResource("3_xhqyu")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAfAAEAAAAAAAAAAAAfAAIAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAUAAAAAAAAAAAAfAAsAAAAAAAAAAAAfAAwAAAAAAAAAAAAfAA0AAAAAAAAAAAAfAA4AAAAAAAAAAAAfAA8AAAAAAAAAAAAfABAAAAAAAAAAAAAfABEAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAcAAAAAAAAAAAAfAAkAAQAAAAAAAQA=")
+
+[node name="Text" type="Control" parent="."]
+z_index = -1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Text"]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 880.0
+offset_right = 713.0
+offset_bottom = 1049.0
+text = "Press Space or
+Click to launch."
+label_settings = SubResource("LabelSettings_swrva")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Text"]
+layout_mode = 0
+offset_left = 622.0
+offset_top = 413.0
+offset_right = 1315.0
+offset_bottom = 698.0
+text = "Changing size changes mass.
+
+Adjust your weight to
+reach the goal."
+label_settings = SubResource("LabelSettings_nml4n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]

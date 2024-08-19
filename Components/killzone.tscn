@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqd68oocae336"]
+
+[ext_resource type="Script" path="res://Components/killzone.gd" id="1_kot63"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qe45n"]
+distance = -1280.0
+
+[node name="Killzone" type="Area2D"]
+script = ExtResource("1_kot63")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_qe45n")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

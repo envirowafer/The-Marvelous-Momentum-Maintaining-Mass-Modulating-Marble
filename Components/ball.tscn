@@ -12,6 +12,7 @@ radius = 20.0
 [node name="Ball" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_mc3an")
 can_sleep = false
+linear_damp = 0.1
 script = ExtResource("1_i81jf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,7 +1,9 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://cu6a4ysqhdirc"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://cu6a4ysqhdirc"]
 
 [ext_resource type="Texture2D" uid="uid://byl1lqt3u2dcl" path="res://Levels/placeholder tile.png" id="1_x3hsd"]
 [ext_resource type="PackedScene" uid="uid://cyrvodmhlcrm2" path="res://Components/exit.tscn" id="2_juv0l"]
+[ext_resource type="PackedScene" uid="uid://c7vtacmi7siag" path="res://Components/exit_up.tscn" id="3_xxb6v"]
+[ext_resource type="PackedScene" uid="uid://bl17gi2788ao5" path="res://Components/kill_tile.tscn" id="4_0lmpa"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wc1u6"]
 friction = 0.5
@@ -17,6 +19,11 @@ texture_region_size = Vector2i(60, 60)
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_bf07p"]
 resource_name = "exit"
 scenes/1/scene = ExtResource("2_juv0l")
+scenes/2/scene = ExtResource("3_xxb6v")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qxyq6"]
+resource_name = "kill tile"
+scenes/1/scene = ExtResource("4_0lmpa")
 
 [resource]
 tile_size = Vector2i(60, 60)
@@ -25,3 +32,4 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_wc1u6")
 sources/0 = SubResource("TileSetAtlasSource_mikqu")
 sources/1 = SubResource("TileSetScenesCollectionSource_bf07p")
+sources/2 = SubResource("TileSetScenesCollectionSource_qxyq6")

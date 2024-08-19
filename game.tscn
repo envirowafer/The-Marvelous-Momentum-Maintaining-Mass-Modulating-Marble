@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://vvl5cnub26xo"]
+[gd_scene load_steps=2 format=3 uid="uid://dxoiufnq5ctsc"]
 
-[ext_resource type="PackedScene" uid="uid://c4mpc1yuchj14" path="res://Levels/level_template.tscn" id="1_l0mhn"]
 [ext_resource type="Script" path="res://game.gd" id="1_uaktx"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" groups=["Level Root"]]
 script = ExtResource("1_uaktx")
 
-[node name="Level Template" parent="." instance=ExtResource("1_l0mhn")]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

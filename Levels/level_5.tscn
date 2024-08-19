@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=4 uid="uid://bs133t4tp4s4s"]
+
+[ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_vg1gc"]
+[ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_vylcq"]
+[ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_yfnfa"]
+[ext_resource type="PackedScene" uid="uid://cm5pdcoc6ugrm" path="res://Components/bounce_pad.tscn" id="4_t2ucp"]
+
+[sub_resource type="Gradient" id="Gradient_d54sy"]
+colors = PackedColorArray(0.760839, 0.0981977, 0.651596, 1, 0.760784, 0.0980392, 0.65098, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7olls"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_d54sy")
+width = 334
+height = 58
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f71yw"]
+resource_local_to_scene = true
+size = Vector2(334, 89.4161)
+
+[node name="Level 5" type="Node2D"]
+
+[node name="Killzone" parent="." instance=ExtResource("1_vg1gc")]
+
+[node name="Launcher" parent="." instance=ExtResource("2_vylcq")]
+position = Vector2(428, 608)
+rotation = 0.523599
+
+[node name="TileMapLayer" parent="." instance=ExtResource("3_yfnfa")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAfAAEAAAAAAAAAAAAfAAIAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAUAAAAAAAAAAAAfAAsAAQAAAAAAAQAfAA0AAAAAAAAAAAAfAA4AAAAAAAAAAAAfAA8AAAAAAAAAAAAfABAAAAAAAAAAAAAfABEAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAgAAAAAAAAAAAAfAAkAAAAAAAAAAAAfAAcAAAAAAAAAAAAOAAcAAgAAAAAAAQAOAAgAAgAAAAAAAQAOAAkAAgAAAAAAAQAOAAoAAgAAAAAAAQAOAAsAAgAAAAAAAQAOAAwAAgAAAAAAAQAOAA0AAgAAAAAAAQATAA0AAgAAAAAAAQATAAwAAgAAAAAAAQATAAsAAgAAAAAAAQATAAoAAgAAAAAAAQATAAkAAgAAAAAAAQATAAgAAgAAAAAAAQATAAcAAgAAAAAAAQATAAYAAgAAAAAAAQATAAUAAgAAAAAAAQATAAQAAgAAAAAAAQATAAMAAgAAAAAAAQATAAIAAgAAAAAAAQATAAEAAgAAAAAAAQAOAA4AAgAAAAAAAQAOAA8AAgAAAAAAAQAOABAAAgAAAAAAAQAOABEAAgAAAAAAAQAOAAYAAgAAAAAAAQAOAAUAAgAAAAAAAQA=")
+
+[node name="Bounce Pad" parent="." instance=ExtResource("4_t2ucp")]
+position = Vector2(1020, 1000)
+rotation = 0.47822
+
+[node name="Sprite2D" parent="Bounce Pad" index="0"]
+texture = SubResource("GradientTexture2D_7olls")
+
+[node name="CollisionShape2D" parent="Bounce Pad" index="1"]
+position = Vector2(0, 15.7081)
+shape = SubResource("RectangleShape2D_f71yw")
+
+[connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/Kill Tile" to="TileMapLayer/Kill Tile" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162327" to="TileMapLayer/@Area2D@162327" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162328" to="TileMapLayer/@Area2D@162328" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162329" to="TileMapLayer/@Area2D@162329" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162330" to="TileMapLayer/@Area2D@162330" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162331" to="TileMapLayer/@Area2D@162331" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162332" to="TileMapLayer/@Area2D@162332" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162333" to="TileMapLayer/@Area2D@162333" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162334" to="TileMapLayer/@Area2D@162334" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162335" to="TileMapLayer/@Area2D@162335" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162336" to="TileMapLayer/@Area2D@162336" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162337" to="TileMapLayer/@Area2D@162337" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162338" to="TileMapLayer/@Area2D@162338" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162339" to="TileMapLayer/@Area2D@162339" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162340" to="TileMapLayer/@Area2D@162340" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162341" to="TileMapLayer/@Area2D@162341" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162342" to="TileMapLayer/@Area2D@162342" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162343" to="TileMapLayer/@Area2D@162343" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162344" to="TileMapLayer/@Area2D@162344" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162345" to="TileMapLayer/@Area2D@162345" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162346" to="TileMapLayer/@Area2D@162346" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162347" to="TileMapLayer/@Area2D@162347" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162348" to="TileMapLayer/@Area2D@162348" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162349" to="TileMapLayer/@Area2D@162349" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162350" to="TileMapLayer/@Area2D@162350" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@162351" to="TileMapLayer/@Area2D@162351" method="_on_body_entered"]
+
+[editable path="Bounce Pad"]

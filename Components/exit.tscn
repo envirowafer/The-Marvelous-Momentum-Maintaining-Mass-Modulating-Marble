@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Components/area_2d.gd" id="1_xk8e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtfwv"]
-size = Vector2(60, 180)
+size = Vector2(180, 180)
 
 [node name="Exit" type="Node2D"]
 
@@ -18,4 +18,4 @@ shape = SubResource("RectangleShape2D_mtfwv")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_vu2ie")
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

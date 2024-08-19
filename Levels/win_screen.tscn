@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=4 uid="uid://cln6biyhslarp"]
+
+[ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_rpwsl"]
+[ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_77knr"]
+[ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_eaw6r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8pog1"]
+font_size = 180
+font_color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Win Screen" type="Node2D"]
+
+[node name="Killzone" parent="." instance=ExtResource("1_rpwsl")]
+
+[node name="Launcher" parent="." instance=ExtResource("2_77knr")]
+position = Vector2(323, 866)
+
+[node name="TileMapLayer" parent="." instance=ExtResource("3_eaw6r")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAfAAEAAAAAAAAAAAAfAAIAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAUAAAAAAAAAAAAfAAsAAAAAAAAAAAAfAAwAAAAAAAAAAAAfAA0AAAAAAAAAAAAfAA4AAAAAAAAAAAAfAA8AAAAAAAAAAAAfABAAAAAAAAAAAAAfABEAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAoAAAAAAAAAAAAfAAgAAAAAAAAAAAAfAAkAAAAAAAAAAAAfAAcAAAAAAAAAAAA=")
+
+[node name="End Label" type="Label" parent="."]
+z_index = -1
+offset_right = 1922.0
+offset_bottom = 1081.0
+text = "Thanks for
+Playing!"
+label_settings = SubResource("LabelSettings_8pog1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Launcher2" parent="." instance=ExtResource("2_77knr")]
+position = Vector2(319, 623)
+
+[node name="Launcher3" parent="." instance=ExtResource("2_77knr")]
+position = Vector2(321, 408)
+
+[node name="Launcher4" parent="." instance=ExtResource("2_77knr")]
+position = Vector2(1606, 963)
+rotation = -0.785398
+
+[node name="Launcher5" parent="." instance=ExtResource("2_77knr")]
+position = Vector2(1591, 744)
+rotation = -0.785398
+
+[node name="Launcher6" parent="." instance=ExtResource("2_77knr")]
+position = Vector2(1574, 525)
+rotation = -0.785398
+
+[connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]
+[connection signal="body_entered" from="Killzone" to="Launcher2" method="_on_killzone_body_entered"]
+[connection signal="body_entered" from="Killzone" to="Launcher3" method="_on_killzone_body_entered"]
+[connection signal="body_entered" from="Killzone" to="Launcher4" method="_on_killzone_body_entered"]
+[connection signal="body_entered" from="Killzone" to="Launcher5" method="_on_killzone_body_entered"]
+[connection signal="body_entered" from="Killzone" to="Launcher6" method="_on_killzone_body_entered"]

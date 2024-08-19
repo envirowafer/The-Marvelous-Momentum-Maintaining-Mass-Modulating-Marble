@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7vtacmi7siag"]
+
+[ext_resource type="PackedScene" uid="uid://cyrvodmhlcrm2" path="res://Components/exit.tscn" id="1_kdo7u"]
+
+[node name="exit_up" type="Node2D"]
+
+[node name="Exit" parent="." instance=ExtResource("1_kdo7u")]
+rotation = 1.5708
+
+[node name="Area2D" parent="Exit" index="0"]
+is_up = true
+
+[editable path="Exit"]

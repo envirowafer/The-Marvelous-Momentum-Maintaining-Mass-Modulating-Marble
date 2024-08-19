@@ -34,6 +34,21 @@ var launch_impulse: Vector2 # launcher will set this if ball is its child
 var launch_queued = false
 
 
+# variable to enable and disable input
+# might be set by a parent launcher
+var input_enabled = true
+
+
+# teleport the ball back to the launcher
+func reset_ball():
+	if is_child_of_launcher:
+		linear_velocity = Vector2.ZERO
+		position = Vector2.ZERO
+		angular_velocity = 0
+		rotation = 0
+		freeze = true
+
+
 # settings for mouse control of radius
 const MOUSE_SENSITIVITY = 0.05
 const MAX_RADIUS_DELTA = 5.0
@@ -89,7 +104,7 @@ func _draw():
 	draw_circle(Vector2.ZERO, radius, Color.WHITE_SMOKE)
 	
 	# draw the trajectory hint if it is enabled
-	if trajectory_hint:
+	if input_enabled and trajectory_hint:
 		# pre-compute needed vectors
 		# calculation expects vectors in global coordinates
 		
@@ -143,7 +158,7 @@ func _process(delta: float):
 
 # use mouse input to change the target radius
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
+	if input_enabled and event is InputEventMouseMotion:
 		var delta_radius = MOUSE_SENSITIVITY * event.screen_relative.y
 		if delta_radius != 0:
 			var r = target_radius + delta_radius
