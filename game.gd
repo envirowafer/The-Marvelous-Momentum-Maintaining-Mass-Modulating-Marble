@@ -10,11 +10,14 @@ var sensitivity_notification_label_alpha = 0
 # we store it here so we can change it with the arrow keys
 var sensitivity = 1:
 	set(value):
+		get_tree().call_group_flags(0, "Balls", "set_mouse_sensitivity", value)
+		
+		if sensitivity * value >= 0:
+			var rounded_sensitivity = round(100 * abs(value)) / 100
+			sensitivity_notification_label.text = "Sensitivity " + str(rounded_sensitivity) + "x"
+			sensitivity_notification_label_alpha = 1.5
+		
 		sensitivity = value
-		get_tree().call_group_flags(0, "Balls", "set_mouse_sensitivity", sensitivity)
-		var rounded_sensitivity = round(100 * sensitivity) / 100
-		sensitivity_notification_label.text = "Sensitivity " + str(rounded_sensitivity) + "x"
-		sensitivity_notification_label_alpha = 1.5
 
 
 # get reference to timer
@@ -109,3 +112,6 @@ func _input(event: InputEvent):
 		if event.is_action("sensitivity_down"):
 			sensitivity /= 1.1
 			sensitivity_change_cooldown.start()
+	
+	if event.is_action_pressed("invert controls"):
+		sensitivity *= -1

@@ -7,7 +7,6 @@ extends RigidBody2D
 @onready var fall_sound: AudioStreamPlayer2D = $Sounds/Fall
 
 
-
 var play_roll_sound = false:
 	set(value):
 		play_roll_sound = value
