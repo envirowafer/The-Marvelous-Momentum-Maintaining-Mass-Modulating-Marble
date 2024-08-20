@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bs133t4tp4s4s"]
+[gd_scene load_steps=12 format=4 uid="uid://bs133t4tp4s4s"]
 
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_vg1gc"]
 [ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_vylcq"]
@@ -16,6 +16,19 @@ height = 89
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f71yw"]
 resource_local_to_scene = true
 size = Vector2(334, 89.4161)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0nln"]
+resource_local_to_scene = true
+size = Vector2(334, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3muo"]
+size = Vector2(332, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbo88"]
+size = Vector2(332, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1n6wu"]
+size = Vector2(2470, 367)
 
 [node name="Level 5" type="Node2D"]
 
@@ -37,8 +50,30 @@ position = Vector2(0, 15.708)
 texture = SubResource("GradientTexture2D_nd0lp")
 
 [node name="CollisionShape2D" parent="Bounce Pad" index="1"]
+visible = false
 position = Vector2(0, 15.7081)
 shape = SubResource("RectangleShape2D_f71yw")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounce Pad"]
+polygon = PackedVector2Array(-167.728, 61.0356, -167.256, -29.3181, 167.296, -29.2738, 433.507, 99.6832, -24.0112, 316.564)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-107, 536.5)
+shape = SubResource("RectangleShape2D_w0nln")
+
+[node name="Right Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2026, 300)
+shape = SubResource("RectangleShape2D_t3muo")
+
+[node name="Right Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2026, 930)
+shape = SubResource("RectangleShape2D_sbo88")
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, -123.5)
+shape = SubResource("RectangleShape2D_1n6wu")
 
 [connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]
 

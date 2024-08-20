@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://bbayfof7nalwp"]
+[gd_scene load_steps=10 format=4 uid="uid://bbayfof7nalwp"]
 
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_04n7q"]
 [ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_vbtgm"]
@@ -8,6 +8,19 @@
 [sub_resource type="LabelSettings" id="LabelSettings_ml8hw"]
 font_size = 30
 font_color = Color(0.858824, 0.768627, 0.611765, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjiau"]
+resource_local_to_scene = true
+size = Vector2(334, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0vwg"]
+size = Vector2(332, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_heydm"]
+size = Vector2(332, 420)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7gwn"]
+size = Vector2(2470, 367)
 
 [node name="Level 1" type="Node2D"]
 
@@ -63,5 +76,23 @@ text = "Use up/down arrow keys to change your sensitivity."
 label_settings = SubResource("LabelSettings_ml8hw")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-107, 536.5)
+shape = SubResource("RectangleShape2D_tjiau")
+
+[node name="Right Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2026, 240)
+shape = SubResource("RectangleShape2D_k0vwg")
+
+[node name="Right Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2026, 870)
+shape = SubResource("RectangleShape2D_heydm")
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, -123.5)
+shape = SubResource("RectangleShape2D_b7gwn")
 
 [connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]

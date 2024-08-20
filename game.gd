@@ -26,13 +26,13 @@ const LEVEL_0 = preload("res://Levels/level_0.tscn")
 const LEVEL_1 = preload("res://Levels/level_1.tscn")
 const LEVEL_2 = preload("res://Levels/level_2.tscn")
 const LEVEL_3 = preload("res://Levels/level_3.tscn")
+const LEVEL_7 = preload("res://Levels/level_7.tscn")
+const LEVEL_8 = preload("res://Levels/level_8.tscn")
 const LEVEL_4 = preload("res://Levels/level_4.tscn")
 const LEVEL_5 = preload("res://Levels/level_5.tscn")
 const LEVEL_6 = preload("res://Levels/level_6.tscn")
 const LEVEL_B = preload("res://Levels/level_b.tscn")
 const LEVEL_B_PLUS = preload("res://Levels/level_b_plus.tscn")
-const LEVEL_7 = preload("res://Levels/level_7.tscn")
-const LEVEL_8 = preload("res://Levels/level_8.tscn")
 const LEVEL_9_PLUS = preload("res://Levels/level_9_plus.tscn")
 const LEVEL_9_PLUS_PLUS = preload("res://Levels/level_9_plus_plus.tscn")
 const WIN_SCREEN = preload("res://Levels/win_screen.tscn")
@@ -40,8 +40,8 @@ const WIN_SCREEN = preload("res://Levels/win_screen.tscn")
 
 # place level scenes into an array
 var level_array = [
-	LEVEL_0, LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5,
-	LEVEL_6, LEVEL_B, LEVEL_B_PLUS, LEVEL_7, LEVEL_8,
+	LEVEL_0, LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_7, LEVEL_8,
+	LEVEL_4, LEVEL_5, LEVEL_6, LEVEL_B, LEVEL_B_PLUS,
 	LEVEL_9_PLUS, LEVEL_9_PLUS_PLUS, WIN_SCREEN
 ]
 

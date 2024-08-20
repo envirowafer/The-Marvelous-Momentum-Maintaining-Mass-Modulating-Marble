@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://ckjfys7leug2"]
+[gd_scene load_steps=10 format=4 uid="uid://ckjfys7leug2"]
 
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_sim0o"]
 [ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_h1frt"]
@@ -7,6 +7,22 @@
 [sub_resource type="LabelSettings" id="LabelSettings_6w6xa"]
 font_size = 70
 font_color = Color(0.858824, 0.768627, 0.611765, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvjw2"]
+resource_local_to_scene = true
+size = Vector2(334, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rll4"]
+size = Vector2(2470, 367)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_di8ur"]
+size = Vector2(60, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4sxv"]
+size = Vector2(342, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8n80"]
+size = Vector2(342, 600)
 
 [node name="Level 7" type="Node2D"]
 
@@ -21,11 +37,35 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAA
 
 [node name="Label" type="Label" parent="."]
 z_index = -1
-offset_left = 469.0
-offset_top = 942.0
-offset_right = 1478.0
-offset_bottom = 1038.0
-text = "Haven't we been here before?"
+offset_left = 714.0
+offset_top = 866.0
+offset_right = 1640.0
+offset_bottom = 962.0
+text = "Can you go higher?"
 label_settings = SubResource("LabelSettings_6w6xa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-107, 536.5)
+shape = SubResource("RectangleShape2D_jvjw2")
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, -123.5)
+shape = SubResource("RectangleShape2D_3rll4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(990, 240)
+shape = SubResource("RectangleShape2D_di8ur")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2031, 149.5)
+shape = SubResource("RectangleShape2D_g4sxv")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2031, 780)
+shape = SubResource("RectangleShape2D_j8n80")
 
 [connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]

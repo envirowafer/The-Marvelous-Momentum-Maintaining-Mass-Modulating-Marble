@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://c0s8tq7m0kkkk"]
+[gd_scene load_steps=13 format=4 uid="uid://c0s8tq7m0kkkk"]
 
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_nx0pk"]
 [ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_nu76e"]
@@ -17,7 +17,20 @@ height = 50
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owjid"]
 resource_local_to_scene = true
-size = Vector2(200, 50)
+size = Vector2(200, 219)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t2mv"]
+resource_local_to_scene = true
+size = Vector2(334, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8g3as"]
+size = Vector2(332, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3lah"]
+size = Vector2(332, 660)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lq5rf"]
+size = Vector2(2470, 367)
 
 [node name="Level 6" type="Node2D"]
 
@@ -34,9 +47,12 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAA
 position = Vector2(981, 929)
 
 [node name="Sprite2D" parent="Bounce Pad" index="0"]
+position = Vector2(0, 83)
+scale = Vector2(1, 4.32)
 texture = SubResource("GradientTexture2D_ovs5v")
 
 [node name="CollisionShape2D" parent="Bounce Pad" index="1"]
+position = Vector2(0, 84.5)
 shape = SubResource("RectangleShape2D_owjid")
 
 [node name="Hint" type="Label" parent="."]
@@ -49,6 +65,24 @@ text = "The bigger they are, the harder they fall."
 label_settings = ExtResource("5_bdxg5")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-107, 536.5)
+shape = SubResource("RectangleShape2D_6t2mv")
+
+[node name="Right Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2026, 120)
+shape = SubResource("RectangleShape2D_8g3as")
+
+[node name="Right Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2026, 750)
+shape = SubResource("RectangleShape2D_s3lah")
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, -123.5)
+shape = SubResource("RectangleShape2D_lq5rf")
 
 [connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]
 
