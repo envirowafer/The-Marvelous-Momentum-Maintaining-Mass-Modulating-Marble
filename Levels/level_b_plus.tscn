@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=4 uid="uid://r6hofaodpjho"]
+
+[ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_34v3n"]
+[ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_qgfb4"]
+[ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_r1io7"]
+[ext_resource type="LabelSettings" uid="uid://bkkxfhtrta6oc" path="res://Levels/default_label_settings.tres" id="4_00b0j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ham8v"]
+size = Vector2(276, 197)
+
+[node name="Level B Plus" type="Node2D"]
+
+[node name="Killzone" parent="." instance=ExtResource("1_34v3n")]
+
+[node name="Launcher" parent="." instance=ExtResource("2_qgfb4")]
+position = Vector2(990, 847)
+rotation = 0.0
+launch_impulse_magnitude = 300.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Launcher"]
+position = Vector2(0, 134.5)
+shape = SubResource("RectangleShape2D_ham8v")
+
+[node name="TileMapLayer" parent="." instance=ExtResource("3_r1io7")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAAQAAAAAQAAAAAAAwAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=")
+
+[node name="Control" type="Control" parent="."]
+visible = false
+z_index = -1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 211.0
+offset_right = 1854.0
+offset_bottom = 639.0
+text = "If you land in your launcher,
+press Space or Click to launch again."
+label_settings = ExtResource("4_00b0j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]

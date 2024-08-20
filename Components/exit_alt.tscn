@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0u11c2s5xvj6"]
+
+[ext_resource type="PackedScene" uid="uid://cyrvodmhlcrm2" path="res://Components/exit.tscn" id="1_or2e7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x07no"]
+resource_local_to_scene = true
+size = Vector2(60, 180)
+
+[node name="Exit Alt" type="Node2D"]
+
+[node name="Exit" parent="." instance=ExtResource("1_or2e7")]
+
+[node name="CollisionShape2D" parent="Exit/Area2D" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_x07no")
+
+[editable path="Exit"]

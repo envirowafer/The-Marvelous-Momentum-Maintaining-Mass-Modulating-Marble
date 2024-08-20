@@ -73,8 +73,12 @@ func reset_ball():
 
 
 # settings for mouse control of radius
-const MOUSE_SENSITIVITY = 0.05
 const MAX_RADIUS_DELTA = 5.0
+var mouse_sensitivity = 0.05
+
+# give this a "set method" so it can be set by a call to the global group
+func set_mouse_sensitivity(value):
+	mouse_sensitivity = 0.05 * value
 
 
 # settings for radius and mass
@@ -189,7 +193,7 @@ func _process(delta: float):
 # use mouse input to change the target radius
 func _unhandled_input(event):
 	if input_enabled and event is InputEventMouseMotion:
-		var delta_radius = MOUSE_SENSITIVITY * event.screen_relative.y
+		var delta_radius = mouse_sensitivity * event.screen_relative.y
 		if delta_radius != 0:
 			var r = target_radius + delta_radius
 			r = clamp(r, MIN_RADIUS, MAX_RADIUS)

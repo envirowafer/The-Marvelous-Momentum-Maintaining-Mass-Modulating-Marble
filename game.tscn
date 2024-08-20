@@ -1,12 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxoiufnq5ctsc"]
+[gd_scene load_steps=3 format=3 uid="uid://dxoiufnq5ctsc"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_uaktx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_32c0v"]
+font_size = 30
 
 [node name="Game" type="Node2D" groups=["Level Root"]]
 script = ExtResource("1_uaktx")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Level Transition Timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Sensitivity Notification Label" type="Label" parent="."]
+z_index = 2
+offset_left = 13.0
+offset_top = 1024.0
+offset_right = 1911.0
+offset_bottom = 1087.0
+text = "Sensitivity 1x"
+label_settings = SubResource("LabelSettings_32c0v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sensitivity Change Cooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Level Transition Timer" to="." method="_on_level_transition_timer_timeout"]

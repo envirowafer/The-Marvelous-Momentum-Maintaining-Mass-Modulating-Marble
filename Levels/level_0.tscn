@@ -8,7 +8,7 @@
 size = Vector2(480, 360)
 
 [sub_resource type="LabelSettings" id="LabelSettings_06o8t"]
-font_size = 90
+font_size = 60
 font_color = Color(0.858824, 0.768627, 0.611765, 1)
 
 [node name="Level 0" type="Node2D"]
@@ -31,7 +31,10 @@ texture = ExtResource("3_q5pbi")
 z_index = -1
 offset_right = 1925.0
 offset_bottom = 721.0
-text = "Move the Mouse to change the ball's size.
+text = "Move the Mouse up/down
+ to change the ball's size.
+
+Fullscreen is recommended.
 
 Press Space or Left Click to continue."
 label_settings = SubResource("LabelSettings_06o8t")

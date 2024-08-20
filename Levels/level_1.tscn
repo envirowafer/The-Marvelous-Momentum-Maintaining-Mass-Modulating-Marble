@@ -53,4 +53,15 @@ label_settings = ExtResource("4_b7qbt")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label3" type="Label" parent="Text"]
+layout_mode = 0
+offset_left = 676.0
+offset_top = 882.0
+offset_right = 1798.0
+offset_bottom = 1051.0
+text = "Use up/down arrow keys to change your sensitivity."
+label_settings = SubResource("LabelSettings_ml8hw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]

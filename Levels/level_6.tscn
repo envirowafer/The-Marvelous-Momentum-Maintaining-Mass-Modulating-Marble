@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://c0s8tq7m0kkkk"]
+[gd_scene load_steps=9 format=4 uid="uid://c0s8tq7m0kkkk"]
 
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_nx0pk"]
 [ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_nu76e"]
 [ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_cg77j"]
 [ext_resource type="PackedScene" uid="uid://cm5pdcoc6ugrm" path="res://Components/bounce_pad.tscn" id="4_5ddco"]
+[ext_resource type="LabelSettings" uid="uid://bkkxfhtrta6oc" path="res://Levels/default_label_settings.tres" id="5_bdxg5"]
 
 [sub_resource type="Gradient" id="Gradient_d54sy"]
 colors = PackedColorArray(0.431373, 0.137255, 0.129412, 1, 0.431373, 0.137255, 0.129412, 1)
@@ -37,6 +38,17 @@ texture = SubResource("GradientTexture2D_ovs5v")
 
 [node name="CollisionShape2D" parent="Bounce Pad" index="1"]
 shape = SubResource("RectangleShape2D_owjid")
+
+[node name="Hint" type="Label" parent="."]
+z_index = -1
+offset_left = 61.0
+offset_top = 60.0
+offset_right = 1859.0
+offset_bottom = 898.0
+text = "The bigger they are, the harder they fall."
+label_settings = ExtResource("5_bdxg5")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]
 

@@ -43,6 +43,7 @@ func _input(event: InputEvent):
 		launch_cooldown.start()
 		
 		if is_instance_valid(ball) and ball.freeze:
+			ball.trajectory_hint = true
 			ball.freeze = false
 			ball.launch_queued = true
 			ball.play_roll_sound = true
@@ -52,6 +53,7 @@ func _input(event: InputEvent):
 		var overlapping_bodies = area_2d.get_overlapping_bodies()
 		for body in overlapping_bodies:
 			if (body != self) and (not body.freeze):
+				body.trajectory_hint = true
 				body.apply_impulse(global_launch_impulse)
 
 
@@ -63,3 +65,12 @@ func reset_ball():
 # allow launching when cooldown is up
 func _on_launch_cooldown_timeout() -> void:
 	can_launch = true
+
+
+func _process(_delta: float):
+	for body in area_2d.get_overlapping_bodies():
+		if (body != self) and (not body.freeze):
+			if body.trajectory_hint == true and body.linear_velocity.length() < 10:
+				body.trajectory_hint = false
+			if body.trajectory_hint == false and body.linear_velocity.length() >= 10:
+				body.trajectory_hint = true

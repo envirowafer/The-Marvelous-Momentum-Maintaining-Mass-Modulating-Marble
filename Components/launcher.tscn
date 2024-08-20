@@ -1,15 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp1qhuwq7qiq4"]
+[gd_scene load_steps=7 format=3 uid="uid://dp1qhuwq7qiq4"]
 
 [ext_resource type="Script" path="res://Components/launcher.gd" id="1_m83ka"]
 [ext_resource type="PackedScene" uid="uid://b14ggju702vd0" path="res://Components/ball.tscn" id="2_354q2"]
 [ext_resource type="Texture2D" uid="uid://buvwnojn4cbtd" path="res://Components/launcher.svg" id="2_cmswi"]
 [ext_resource type="AudioStream" uid="uid://bxvo0h7f3m4al" path="res://Components/443052__amberdemeillon__pool_table_break_clip.wav" id="4_ucwhl"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rbjva"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqls8"]
 size = Vector2(55, 55)
 
 [node name="Launcher" type="StaticBody2D" groups=["Launchers"]]
 rotation = 0.785398
+physics_material_override = SubResource("PhysicsMaterial_rbjva")
 script = ExtResource("1_m83ka")
 
 [node name="Ball" parent="." instance=ExtResource("2_354q2")]

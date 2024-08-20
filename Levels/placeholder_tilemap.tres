@@ -1,9 +1,11 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://cu6a4ysqhdirc"]
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://cu6a4ysqhdirc"]
 
 [ext_resource type="Texture2D" uid="uid://b5mu8510s5bsk" path="res://mid-wood-texture.tres" id="1_5431h"]
 [ext_resource type="PackedScene" uid="uid://cyrvodmhlcrm2" path="res://Components/exit.tscn" id="2_juv0l"]
 [ext_resource type="PackedScene" uid="uid://c7vtacmi7siag" path="res://Components/exit_up.tscn" id="3_xxb6v"]
 [ext_resource type="PackedScene" uid="uid://bl17gi2788ao5" path="res://Components/kill_tile.tscn" id="4_0lmpa"]
+[ext_resource type="PackedScene" uid="uid://dj28jpng1y0jf" path="res://Components/exit_down.tscn" id="4_f78xf"]
+[ext_resource type="PackedScene" uid="uid://c0u11c2s5xvj6" path="res://Components/exit_alt.tscn" id="5_2af6e"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wc1u6"]
 friction = 0.5
@@ -20,6 +22,8 @@ texture_region_size = Vector2i(60, 60)
 resource_name = "exit"
 scenes/1/scene = ExtResource("2_juv0l")
 scenes/2/scene = ExtResource("3_xxb6v")
+scenes/3/scene = ExtResource("4_f78xf")
+scenes/4/scene = ExtResource("5_2af6e")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qxyq6"]
 resource_name = "kill tile"

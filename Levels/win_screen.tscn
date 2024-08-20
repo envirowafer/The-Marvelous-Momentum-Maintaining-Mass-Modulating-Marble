@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=4 uid="uid://cln6biyhslarp"]
+[gd_scene load_steps=6 format=4 uid="uid://cln6biyhslarp"]
 
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_rpwsl"]
 [ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_77knr"]
 [ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_eaw6r"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8pog1"]
-font_size = 180
+font_size = 120
+font_color = Color(0.858824, 0.768627, 0.611765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_if8q2"]
+font_size = 28
 font_color = Color(0.858824, 0.768627, 0.611765, 1)
 
 [node name="Win Screen" type="Node2D"]
@@ -18,13 +22,42 @@ position = Vector2(323, 866)
 [node name="TileMapLayer" parent="." instance=ExtResource("3_eaw6r")]
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAfAAEAAAAAAAAAAAAfAAIAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAUAAAAAAAAAAAAfAAsAAAAAAAAAAAAfAAwAAAAAAAAAAAAfAA0AAAAAAAAAAAAfAA4AAAAAAAAAAAAfAA8AAAAAAAAAAAAfABAAAAAAAAAAAAAfABEAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAoAAAAAAAAAAAAfAAgAAAAAAAAAAAAfAAkAAAAAAAAAAAAfAAcAAAAAAAAAAAA=")
 
-[node name="End Label" type="Label" parent="."]
+[node name="End Text" type="Control" parent="."]
 z_index = -1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Thank You Label" type="Label" parent="End Text"]
 offset_right = 1922.0
-offset_bottom = 1081.0
-text = "Thanks for
-Playing!"
+offset_bottom = 417.0
+text = "Thanks for Playing!"
 label_settings = SubResource("LabelSettings_8pog1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits Label" type="Label" parent="End Text"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 238.0
+offset_right = 1862.0
+offset_bottom = 1075.0
+text = "Game by:
+envirowafer
+
+Ball launch sound effect:
+Pool_Table_Break.WAV by AmberdeMeillon -- https://freesound.org/s/443052/
+License: Creative Commons 0
+
+Ball drop and roll sound effects:
+Ball on table.wav by NeatoEnt -- https://freesound.org/s/458137/
+License: Creative Commons 0
+
+Ball in goal sound effect:
+Golf ball in hole.wav by Scottrex05 -- https://freesound.org/s/593482/
+License: Creative Commons 0"
+label_settings = SubResource("LabelSettings_if8q2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
