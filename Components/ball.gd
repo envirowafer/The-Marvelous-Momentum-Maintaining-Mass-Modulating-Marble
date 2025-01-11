@@ -1,238 +1,222 @@
-extends RigidBody2D
+class_name Ball extends RigidBody2D
+## A ball that changes size with mouse movement.
+## Size changes conserve momentum and density, but do not conserve velocity,
+## mass, or energy.
+## Can be launched out of a launcher.
+## Draws a dotted line that shows the ball's trajectory.
 
 
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var bounce_sound: AudioStreamPlayer2D = $Sounds/Bounce
-@onready var roll_sound: AudioStreamPlayer2D = $Sounds/Roll
-@onready var fall_sound: AudioStreamPlayer2D = $Sounds/Fall
+## Represents the state of the ball.
+enum State {
+	HELD, ## The ball is held by a launcher.
+	ROLLING ## The ball is rolling around on the game board.
+}
 
 
-var play_roll_sound = false:
-	# play or pause roll sound depending on value
+## Starting value of the radius.
+const DEFAULT_RADIUS: float = 20.0
+## Starting value of the mass.
+const DEFAULT_MASS: float = 1.0
+## Minimum allowed radius.
+const MIN_RADIUS: float = 15.0
+## Maximum allowed radius.
+const MAX_RADIUS: float = 30.0
+
+
+## Controls the ball's current state.
+@export var state: State = State.HELD:
+	# update physics and sound to match current state
 	set(value):
-		play_roll_sound = value
-		if roll_sound.playing:
-			roll_sound.stream_paused = not value
-		elif value == true:
-			roll_sound.play()
+		state = value
+		
+		# only proceed when this node is ready
+		# ensures node references have been initialized
+		if not is_node_ready():
+			await ready
+		
+		# play or pause roll sound according to state
+		if value == State.ROLLING:
+			_roll_sound.play()
+		_roll_sound.stream_paused = (value != State.ROLLING)
+		
+		# freeze or unfreeze ball according to state
+		freeze = (value == State.HELD)
+		set_deferred("lock_rotation", value == State.HELD)
+		trajectory_hint.frozen = (value == State.HELD)
 
+## The component that controls the ball's trajectory hint.
+@onready var trajectory_hint: TrajectoryHint = $"Trajectory Hint"
 
-var ball_color = Color(0.75, 0.65, 0.65)
+## Set by parent launcher. Indicates whether this ball belongs to a launcher.
+var is_child_of_launcher: bool = false
 
+## Set by parent launcher. If ball is a child of a launcher, this is the
+## impulse that launcher applies to this ball.
+var launch_impulse: Vector2 
 
-# settings for trajectory hint
-@export var trajectory_hint = true
-const NUM_DOTS = 15
-const DOT_RADIUS = 5.0
-const DOT_TIME_SEPARATION = 0.1
-const MIN_TRAJECTORY_HINT_SPEED = 100.0
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var combined_damp = linear_damp + ProjectSettings.get_setting("physics/2d/default_linear_damp")
-
-# keeps track of game time, used to render trajectory hint
-var game_time = 0
-
-# computes the alpha of each dot
-var max_dot_time = NUM_DOTS * DOT_TIME_SEPARATION
-func dot_t_to_alpha(t: float) -> float:
-	t -= DOT_TIME_SEPARATION
-	var numerator   = t * (max_dot_time - t) * (max_dot_time + 2)**2
-	var denominator = (t+1) * (max_dot_time - t + 1) * (max_dot_time)**2
-	return clamp(numerator/denominator, 0, 1)
-
-# variables for handling trajectory preview when in launcher
-var is_child_of_launcher = false # launcher will set this to true if ball is its child
-var launch_impulse: Vector2 # launcher will set this if ball is its child
-
-
-# variable for queuing a launch
-# expected to be modified by parent launcher
-var launch_queued = false
-
-
-# variable to enable and disable input
-# might be set by a parent launcher
-var input_enabled = true
-
-
-# called by kill tiles when the ball falls into them
-func fall():
-	fall_sound.play()
-	reset_ball()
-
-
-# teleport the ball back to the launcher
-func reset_ball():
-	if is_child_of_launcher:
-		linear_velocity = Vector2.ZERO
-		position = Vector2.ZERO
-		angular_velocity = 0
-		rotation = 0
-		freeze = true
-		play_roll_sound = false
+## Enables and disables input.
+var is_input_enabled: bool = true
 
 
 # settings for mouse control of radius
-const MAX_RADIUS_DELTA = 5.0
-var mouse_sensitivity = 0.05
+## The most the radius can change in a frame.
+const MAX_RADIUS_DELTA: float = 5.0
 
-# give this a "set method" so it can be set by a call to the global group
-func set_mouse_sensitivity(value):
-	mouse_sensitivity = 0.05 * value
+# The amount that mouse movement changes the radius.
+var _mouse_sensitivity: float = 0.05
 
-
-# settings for radius and mass
-const DEFAULT_RADIUS = 20.0
-const DEFAULT_MASS = 1
-const MIN_RADIUS = 15.0
-const MAX_RADIUS = 30.0
-
-# compute the ball's mass from its radius
-func radius_to_mass(r):
-	var scale_factor = r / DEFAULT_RADIUS
-	return DEFAULT_MASS * scale_factor**2
+# This method is called by a global group.
+## Set the mouse sensitivity to a particular value. The default is 1.
+func set_mouse_sensitivity(value: float):
+	_mouse_sensitivity = 0.05 * value
 
 
-# controls the ball's current size
-var radius = DEFAULT_RADIUS:
+## Controls the ball's current size.
+var radius: float = DEFAULT_RADIUS:
 	set(value):
 		radius = value
+		
+		# update the sprite's radius
+		_circle_renderer.radius = radius
+		
 		# update the collision shape's radius to match the ball's radius
-		if is_instance_valid(collision_shape_2d):
-			collision_shape_2d.shape.radius = radius
-			
-			# update mass and velocity to conserve momentum
-			var new_mass = radius_to_mass(radius)
-			var new_linear_velocity = mass * linear_velocity / new_mass
-			mass = new_mass
-			linear_velocity = new_linear_velocity
+		if is_instance_valid(_collision_shape_2d):
+			_collision_shape_2d.shape.radius = radius
+		
+		# update mass and velocity to conserve momentum
+		var new_mass = _radius_to_mass(radius)
+		var new_linear_velocity = mass * linear_velocity / new_mass
+		mass = new_mass
+		linear_velocity = new_linear_velocity
 
 # we can't have the radius change too fast,
 # so instead of the player controlling the radius directly,
 # the player controls this target radius
 # that the actual radius will move toward every physics frame
-var target_radius = radius
+var _target_radius: float = radius
+
+# Computes the ball's mass from its radius.
+func _radius_to_mass(r: float) -> float:
+	var scale_factor = r / DEFAULT_RADIUS
+	return DEFAULT_MASS * scale_factor**2
+
+
+# sprite and collider
+@onready var _circle_renderer: CircleRenderer = $"Circle Renderer"
+@onready var _collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
+# sounds
+@onready var _bounce_sound: AudioStreamPlayer2D = $Sounds/Bounce
+@onready var _roll_sound: AudioStreamPlayer2D = $Sounds/Roll
+@onready var _fall_sound: AudioStreamPlayer2D = $Sounds/Fall
+
+# If true, the ball will launch on the next physics update.
+# Set by the public method [queue_launch].
+var _is_launch_queued: bool = false
 
 
 func _ready():
-	# set the initial collision shape radius to match the ball's radius
-	collision_shape_2d.shape.radius = radius
+	# call the set function for the ball's state to update physics and sound
+	state = state
 	
 	# set the default mass
 	mass = DEFAULT_MASS
+	
+	# set the initial collision shape radius to match the ball's radius
+	_collision_shape_2d.shape.radius = radius
+	
+	# share linear damping with trajectory hint
+	trajectory_hint.linear_damp = linear_damp
+	
+	# share min and max mass with roll sound
+	_roll_sound.min_mass = _radius_to_mass(MIN_RADIUS)
+	_roll_sound.max_mass = _radius_to_mass(MAX_RADIUS)
+	
+	# share min and max mass with bounce sound
+	_bounce_sound.min_mass = _radius_to_mass(MIN_RADIUS)
+	_bounce_sound.max_mass = _radius_to_mass(MAX_RADIUS)
 	
 	# set the mouse mode to take input from it
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
-# draw a custom sprite that scales with the radius
-func _draw():
-	# draw filled circle
-	draw_circle(Vector2.ZERO, radius, ball_color)
+func _process(_delta: float):
+	# move the actual radius toward the target radius
+	# radius updates in _integrate_forces if not frozen
+	if freeze and radius != _target_radius:
+		radius = move_toward(radius, _target_radius, MAX_RADIUS_DELTA)
 	
-	# draw the trajectory hint if it is enabled
-	if input_enabled and trajectory_hint:
-		# pre-compute needed vectors
-		# calculation expects vectors in global coordinates
-		
-		# use a dummy variable to customize preview velocity,
-		# such as previewing lauch trajectory before launching.
-		# also, linear_velocity is in global coordinates
-		var simulated_velocity = linear_velocity
-		
-		# account for impulse of a launcher, if in one.
-		# launch impulse is expected in global coordinates
-		if is_child_of_launcher and (freeze or launch_queued):
-			simulated_velocity += launch_impulse / mass
-		
-		
-		# compute the gravity in global coordinates
-		var gravity_vector = gravity * Vector2.DOWN
-		
-		# draw the dots
-		for n in NUM_DOTS:
-			# t is the time it is projected to take for the ball to reach this dot
-			var t = (n+1) * DOT_TIME_SEPARATION - int(not freeze) * fposmod(game_time, DOT_TIME_SEPARATION)
-			
-			# compute delta_x, factoring in air resistance
-			var a = 1 - exp(-t * combined_damp)
-			var b = simulated_velocity/combined_damp - gravity_vector/(combined_damp**2)
-			var c = t * gravity_vector / combined_damp
-			var delta_x = a*b + c
-			
-			# compute remaining values needed
-			var draw_radius = DOT_RADIUS * (DOT_TIME_SEPARATION+1) / (t+1)
-			var color = Color(0.662745, 0.662745, 0.662745, dot_t_to_alpha(t))
-			
-			# delta_x is in global coordinates, so we need to convert it to local
-			delta_x = delta_x.rotated(-global_rotation)
-			
-			# draw the dot
-			draw_circle(delta_x, draw_radius, color)
-
-
-func _process(delta: float):
-	# redraw the circle its predicted trajectory every frame
-	queue_redraw()
+	# update the linear velocity used to compute the trajectory hint
+	if state == State.HELD and is_child_of_launcher:
+		trajectory_hint.linear_velocity = launch_impulse / mass
+	else:
+		trajectory_hint.linear_velocity = linear_velocity
 	
-	# update game time
-	game_time += delta
-	
-	# update the radius if frozen
-	if freeze and radius != target_radius:
-		radius = move_toward(radius, target_radius, MAX_RADIUS_DELTA)
-	
-	# customize the parameters of the roll sound to fit the ball
-	var speed = linear_velocity.length()
-	var volume = 60 * (log(speed)/log(1000) - 1.1)
-	roll_sound.volume_db = clamp(volume, -60, 0)
-	var pitch_scale = 1 - 0.05 * ((mass - radius_to_mass(MIN_RADIUS))/(radius_to_mass(MAX_RADIUS) - radius_to_mass(MIN_RADIUS)) - 0.5)
-	roll_sound.pitch_scale = pitch_scale
+	# update parameters used to compute roll sound volume and pitch
+	_roll_sound.speed = linear_velocity.length()
+	_roll_sound.mass = mass
 
 
-# use mouse input to change the target radius
-func _unhandled_input(event):
-	if input_enabled and event is InputEventMouseMotion:
-		var delta_radius = mouse_sensitivity * event.screen_relative.y
-		if delta_radius != 0:
-			var r = target_radius + delta_radius
-			r = clamp(r, MIN_RADIUS, MAX_RADIUS)
-			target_radius = r
-
-
-# move the actual radius toward the target radius
 func _integrate_forces(_state):
-	if radius != target_radius:
-		radius = move_toward(radius, target_radius, MAX_RADIUS_DELTA)
+	# move the actual radius toward the target radius
+	# radius updates in _process if frozen
+	if radius != _target_radius:
+		radius = move_toward(radius, _target_radius, MAX_RADIUS_DELTA)
 	
 	# if the parent launcher has queued a launch, then
 	# launch the ball and unqueue the launch
-	if launch_queued:
+	if _is_launch_queued:
+		# make sure ball is not moving prior to launch
 		linear_velocity = Vector2.ZERO
 		position = Vector2.ZERO
 		angular_velocity = 0
 		rotation = 0
+		
+		# set ball state to rolling
+		state = State.ROLLING
+		
+		# make sure trajectory hint is enabled
+		trajectory_hint.enabled = true
+		
+		# launch the ball
 		apply_impulse(launch_impulse)
-		launch_queued = false
+		
+		# unqueue the launch
+		_is_launch_queued = false
 
 
-# play sound effect when colliding with stuff
-func _on_body_entered(_body: Node) -> void:
+# use mouse input to change the target radius
+func _unhandled_input(event):
+	if is_input_enabled and event is InputEventMouseMotion:
+		var delta_radius = _mouse_sensitivity * event.screen_relative.y
+		if delta_radius != 0:
+			var r = _target_radius + delta_radius
+			r = clamp(r, MIN_RADIUS, MAX_RADIUS)
+			_target_radius = r
+
+
+# play sound effect when colliding with walls
+func _on_body_entered(_body: Node):
 	var speed = linear_velocity.length()
-	if speed < 100:
-		return
-	var volume = 60 * (log(speed)/log(1000) - 1)
-	var pitch_scale = 0.7 - 0.5 * ((mass - radius_to_mass(MIN_RADIUS))/(radius_to_mass(MAX_RADIUS) - radius_to_mass(MIN_RADIUS)) - 0.5)
-	bounce_sound.volume_db = clamp(volume, -30, 0)
-	bounce_sound.pitch_scale = pitch_scale
-	bounce_sound.play()
+	_bounce_sound.play_with_parameters(speed, mass)
 
 
-# loop the audio when it is done
-func _on_roll_finished() -> void:
-	roll_sound.play()
+## Launch the ball on the next physics frame.
+func queue_launch():
+	# Unfreeze outside [state] set function so that [_integrate_forces] is
+	# called. State needs to change at the same time the impulse is applied
+	# so trajectory hint does not break.
+	freeze = false
+	_is_launch_queued = true
 
 
-# stop the sound when leaving the tree
-func _on_tree_exiting() -> void:
-	roll_sound.stop()
+## Play fall sound, reset ball position, and set ball state.
+## Called by kill zones when ball falls into them.
+func fall():
+	_fall_sound.play()
+	if is_child_of_launcher:
+		linear_velocity = Vector2.ZERO
+		position = Vector2.ZERO
+		angular_velocity = 0
+		rotation = 0
+		state = State.HELD

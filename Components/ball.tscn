@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://b14ggju702vd0"]
+[gd_scene load_steps=11 format=3 uid="uid://dwt502xv6uxcw"]
 
-[ext_resource type="Script" path="res://Components/ball.gd" id="1_i81jf"]
-[ext_resource type="AudioStream" uid="uid://kfc7dwtrllds" path="res://Components/wall_hit_sound.wav" id="2_ya81w"]
-[ext_resource type="AudioStream" uid="uid://c1cqdxu1c3nfe" path="res://Components/458137__neatoent__ball-on-table_roll_clip.wav" id="3_0wvsq"]
-[ext_resource type="AudioStream" uid="uid://bwp5wdh3d3yj7" path="res://Components/458137__neatoent__ball-on-table_fall_clip.wav" id="4_vip25"]
+[ext_resource type="Script" path="res://Components/ball.gd" id="1_50qcq"]
+[ext_resource type="AudioStream" uid="uid://kfc7dwtrllds" path="res://Components/wall_hit_sound.wav" id="2_fyj6m"]
+[ext_resource type="Script" path="res://Components/bounce.gd" id="3_4uv82"]
+[ext_resource type="AudioStream" uid="uid://c1cqdxu1c3nfe" path="res://Components/458137__neatoent__ball-on-table_roll_clip.wav" id="3_xt5dx"]
+[ext_resource type="Script" path="res://Components/roll.gd" id="4_fev86"]
+[ext_resource type="AudioStream" uid="uid://bwp5wdh3d3yj7" path="res://Components/458137__neatoent__ball-on-table_fall_clip.wav" id="4_qnfva"]
+[ext_resource type="PackedScene" uid="uid://cad1nxv8ph8gm" path="res://Components/circle_renderer.tscn" id="5_6621n"]
+[ext_resource type="Script" path="res://Components/trajectory_hint.gd" id="6_gaq55"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mc3an"]
 friction = 0.1
@@ -19,7 +23,7 @@ can_sleep = false
 contact_monitor = true
 max_contacts_reported = 5
 linear_damp = 0.1
-script = ExtResource("1_i81jf")
+script = ExtResource("1_50qcq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3ee6x")
@@ -27,18 +31,25 @@ shape = SubResource("CircleShape2D_3ee6x")
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="Bounce" type="AudioStreamPlayer2D" parent="Sounds"]
-stream = ExtResource("2_ya81w")
+stream = ExtResource("2_fyj6m")
 pitch_scale = 1.3
 bus = &"SFX"
+script = ExtResource("3_4uv82")
 
 [node name="Roll" type="AudioStreamPlayer2D" parent="Sounds"]
-stream = ExtResource("3_0wvsq")
+stream = ExtResource("3_xt5dx")
 bus = &"SFX"
+script = ExtResource("4_fev86")
 
 [node name="Fall" type="AudioStreamPlayer2D" parent="Sounds"]
-stream = ExtResource("4_vip25")
+stream = ExtResource("4_qnfva")
 bus = &"SFX"
 
+[node name="Circle Renderer" parent="." instance=ExtResource("5_6621n")]
+
+[node name="Trajectory Hint" type="Node2D" parent="."]
+script = ExtResource("6_gaq55")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
-[connection signal="finished" from="Sounds/Roll" to="." method="_on_roll_finished"]
+[connection signal="finished" from="Sounds/Roll" to="Sounds/Roll" method="_on_finished"]
+[connection signal="tree_exiting" from="Sounds/Roll" to="Sounds/Roll" method="_on_tree_exiting"]

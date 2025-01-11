@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=4 uid="uid://c0s8tq7m0kkkk"]
 
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_nx0pk"]
-[ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_nu76e"]
+[ext_resource type="PackedScene" uid="uid://cfvplvrfdj7bx" path="res://Components/launcher.tscn" id="2_coyl3"]
 [ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_cg77j"]
 [ext_resource type="PackedScene" uid="uid://cm5pdcoc6ugrm" path="res://Components/bounce_pad.tscn" id="4_5ddco"]
 [ext_resource type="LabelSettings" uid="uid://bkkxfhtrta6oc" path="res://Levels/default_label_settings.tres" id="5_bdxg5"]
@@ -36,7 +36,7 @@ size = Vector2(2470, 367)
 
 [node name="Killzone" parent="." instance=ExtResource("1_nx0pk")]
 
-[node name="Launcher" parent="." instance=ExtResource("2_nu76e")]
+[node name="Launcher" parent="." instance=ExtResource("2_coyl3")]
 position = Vector2(279, 838)
 launch_impulse_magnitude = 800.0
 
@@ -83,7 +83,5 @@ shape = SubResource("RectangleShape2D_s3lah")
 [node name="Top" type="CollisionShape2D" parent="Walls"]
 position = Vector2(960, -123.5)
 shape = SubResource("RectangleShape2D_lq5rf")
-
-[connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]
 
 [editable path="Bounce Pad"]

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_shc23"]
 [ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_wptnd"]
 [ext_resource type="PackedScene" uid="uid://bl17gi2788ao5" path="res://Components/kill_tile.tscn" id="4_l8d6x"]
-[ext_resource type="PackedScene" uid="uid://cfvplvrfdj7bx" path="res://Refactored Components/launcher_refactored.tscn" id="5_dy6xi"]
+[ext_resource type="PackedScene" uid="uid://cfvplvrfdj7bx" path="res://Components/launcher.tscn" id="5_dy6xi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su13o"]
 size = Vector2(240, 60)

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://vvl5cnub26xo"]
-
-[ext_resource type="Script" path="res://Levels/Unused/camera_level_transition.gd" id="1_uaktx"]
-
-[node name="Camera Level Transition" type="Node2D" groups=["Level Root"]]
-script = ExtResource("1_uaktx")

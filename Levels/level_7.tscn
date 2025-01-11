@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=4 uid="uid://ckjfys7leug2"]
 
 [ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_sim0o"]
-[ext_resource type="PackedScene" uid="uid://dp1qhuwq7qiq4" path="res://Components/launcher.tscn" id="2_h1frt"]
+[ext_resource type="PackedScene" uid="uid://cfvplvrfdj7bx" path="res://Components/launcher.tscn" id="2_wfuak"]
 [ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_kodv4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6w6xa"]
@@ -28,7 +28,7 @@ size = Vector2(342, 600)
 
 [node name="Killzone" parent="." instance=ExtResource("1_sim0o")]
 
-[node name="Launcher" parent="." instance=ExtResource("2_h1frt")]
+[node name="Launcher" parent="." instance=ExtResource("2_wfuak")]
 position = Vector2(323, 866)
 launch_impulse_magnitude = 1700.0
 
@@ -67,5 +67,3 @@ shape = SubResource("RectangleShape2D_g4sxv")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
 position = Vector2(2031, 780)
 shape = SubResource("RectangleShape2D_j8n80")
-
-[connection signal="body_entered" from="Killzone" to="Launcher" method="_on_killzone_body_entered"]

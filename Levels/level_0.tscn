@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dp43ktyx6oivd"]
 
 [ext_resource type="Script" path="res://Levels/level_0.gd" id="1_i1w0g"]
-[ext_resource type="PackedScene" uid="uid://b14ggju702vd0" path="res://Components/ball.tscn" id="2_8dim5"]
+[ext_resource type="PackedScene" uid="uid://dwt502xv6uxcw" path="res://Components/ball.tscn" id="2_hrx6q"]
 [ext_resource type="Texture2D" uid="uid://b5mu8510s5bsk" path="res://mid-wood-texture.tres" id="3_q5pbi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1d70k"]
@@ -14,9 +14,12 @@ font_color = Color(0.858824, 0.768627, 0.611765, 1)
 [node name="Level 0" type="Node2D"]
 script = ExtResource("1_i1w0g")
 
-[node name="Ball" parent="." instance=ExtResource("2_8dim5")]
+[node name="Ball" parent="." instance=ExtResource("2_hrx6q")]
 position = Vector2(960, 700)
-trajectory_hint = false
+state = 1
+
+[node name="Trajectory Hint" parent="Ball" index="3"]
+enabled = false
 
 [node name="Platform" type="StaticBody2D" parent="."]
 position = Vector2(960, 900)
@@ -40,3 +43,5 @@ Press Space or Left Click to continue."
 label_settings = SubResource("LabelSettings_06o8t")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[editable path="Ball"]
