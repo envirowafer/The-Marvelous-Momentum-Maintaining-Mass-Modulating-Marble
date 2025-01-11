@@ -8,6 +8,7 @@ extends RigidBody2D
 
 
 var play_roll_sound = false:
+	# play or pause roll sound depending on value
 	set(value):
 		play_roll_sound = value
 		if roll_sound.playing:

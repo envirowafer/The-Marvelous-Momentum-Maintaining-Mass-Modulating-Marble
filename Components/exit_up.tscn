@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7vtacmi7siag"]
+[gd_scene load_steps=3 format=3 uid="uid://c7vtacmi7siag"]
 
 [ext_resource type="PackedScene" uid="uid://cyrvodmhlcrm2" path="res://Components/exit.tscn" id="1_kdo7u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tytn2"]
+resource_local_to_scene = true
+size = Vector2(180, 180)
 
 [node name="Exit Up" type="Node2D"]
 
 [node name="Exit" parent="." instance=ExtResource("1_kdo7u")]
 rotation = 1.5708
+
+[node name="CollisionShape2D" parent="Exit/Area2D" index="0"]
+shape = SubResource("RectangleShape2D_tytn2")
 
 [editable path="Exit"]

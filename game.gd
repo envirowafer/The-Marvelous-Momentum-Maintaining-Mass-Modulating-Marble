@@ -115,3 +115,6 @@ func _input(event: InputEvent):
 	
 	if event.is_action_pressed("invert controls"):
 		sensitivity *= -1
+	
+	if event.is_action_pressed("reset_game"):
+		get_tree().reload_current_scene()
