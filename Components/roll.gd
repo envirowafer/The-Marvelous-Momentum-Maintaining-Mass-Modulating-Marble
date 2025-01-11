@@ -24,10 +24,10 @@ var mass: float:
 		pitch_scale = 1 - 0.05 * ((mass - min_mass)/(max_mass - min_mass) - 0.5)
 
 
-# loop the roll sound when it is done
+# Loop the roll sound when it is done.
 func _on_finished():
 	play()
 
-# stop the roll sound when leaving the tree
+# Stop the roll sound when leaving the scene tree.
 func _on_tree_exiting():
 	stop()

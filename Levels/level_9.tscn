@@ -1,86 +1,43 @@
-[gd_scene load_steps=11 format=4 uid="uid://ce8axjrub6hne"]
+[gd_scene load_steps=6 format=4 uid="uid://1nv6gy56jfj6"]
 
-[ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_0tswb"]
-[ext_resource type="PackedScene" uid="uid://cfvplvrfdj7bx" path="res://Components/launcher.tscn" id="2_s55a0"]
-[ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_uyg8f"]
-[ext_resource type="PackedScene" uid="uid://cm5pdcoc6ugrm" path="res://Components/bounce_pad.tscn" id="4_57764"]
+[ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_0bwcy"]
+[ext_resource type="PackedScene" uid="uid://cfvplvrfdj7bx" path="res://Components/launcher.tscn" id="2_kiam2"]
+[ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_i66nu"]
+[ext_resource type="LabelSettings" uid="uid://bkkxfhtrta6oc" path="res://Levels/default_label_settings.tres" id="4_ob4db"]
 
-[sub_resource type="Gradient" id="Gradient_d54sy"]
-colors = PackedColorArray(0.431373, 0.137255, 0.129412, 1, 0.431373, 0.137255, 0.129412, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltvqd"]
+size = Vector2(268, 226)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hf5sm"]
-resource_local_to_scene = true
-gradient = SubResource("Gradient_d54sy")
-width = 200
-height = 50
+[node name="Level B" type="Node2D"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_awidu"]
-resource_local_to_scene = true
-size = Vector2(200, 50)
+[node name="Killzone" parent="." instance=ExtResource("1_0bwcy")]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwdqx"]
-resource_local_to_scene = true
-size = Vector2(334, 1080)
+[node name="Launcher" parent="." instance=ExtResource("2_kiam2")]
+position = Vector2(990, 511)
+rotation = 0.0
+launch_impulse_magnitude = 500.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8803"]
-size = Vector2(332, 1199)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Launcher"]
+position = Vector2(0, 150)
+shape = SubResource("RectangleShape2D_ltvqd")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3etsy"]
-size = Vector2(2470, 367)
+[node name="TileMapLayer" parent="." instance=ExtResource("3_i66nu")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAAQAAAAAQAAAAAAAwAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=")
 
-[node name="Level 9" type="Node2D"]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Killzone" parent="." instance=ExtResource("1_0tswb")]
-
-[node name="Launcher" parent="." instance=ExtResource("2_s55a0")]
-position = Vector2(277, 841)
-rotation = 0.349066
-launch_impulse_magnitude = 2000.0
-
-[node name="TileMapLayer" parent="." instance=ExtResource("3_uyg8f")]
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAfAAEAAAAAAAAAAAAfAAIAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAUAAAAAAAAAAAAfAAsAAAAAAAAAAAAfAAwAAAAAAAAAAAAfAA0AAAAAAAAAAAAfAA4AAAAAAAAAAAAfAA8AAAAAAAAAAAAfABAAAAAAAAAAAAAfABEAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAoAAAAAAAAAAAAfAAgAAAAAAAAAAAAfAAkAAAAAAAAAAAAJABEAAgAAAAAAAQAJABAAAgAAAAAAAQAJAA8AAgAAAAAAAQAJAA4AAgAAAAAAAQAJAA0AAgAAAAAAAQAJAAwAAgAAAAAAAQAJAAsAAgAAAAAAAQAJAAoAAgAAAAAAAQAJAAkAAgAAAAAAAQAJAAgAAgAAAAAAAQAJAAcAAgAAAAAAAQARAAEAAgAAAAAAAQARAAIAAgAAAAAAAQARAAMAAgAAAAAAAQARAAQAAgAAAAAAAQARAAUAAgAAAAAAAQARAAYAAgAAAAAAAQARAAcAAgAAAAAAAQARAAgAAgAAAAAAAQARAAkAAgAAAAAAAQAYABEAAgAAAAAAAQAYABAAAgAAAAAAAQAYAA8AAgAAAAAAAQAYAA4AAgAAAAAAAQAYAA0AAgAAAAAAAQAYAAwAAgAAAAAAAQAYAAsAAgAAAAAAAQAYAAoAAgAAAAAAAQAYAAkAAgAAAAAAAQAYAAgAAgAAAAAAAQAYAAcAAgAAAAAAAQAYAAYAAgAAAAAAAQAZABEAAgAAAAAAAQAaABEAAgAAAAAAAQAbABEAAgAAAAAAAQAdABEAAQAAAAAAAgAfAAcAAAAAAAAAAAA=")
-
-[node name="Bounce Pad" parent="." instance=ExtResource("4_57764")]
-position = Vector2(571, 100)
-
-[node name="Sprite2D" parent="Bounce Pad" index="0"]
-texture = SubResource("GradientTexture2D_hf5sm")
-
-[node name="CollisionShape2D" parent="Bounce Pad" index="1"]
-shape = SubResource("RectangleShape2D_awidu")
-
-[node name="Bounce Pad2" parent="." instance=ExtResource("4_57764")]
-position = Vector2(1054, 1028)
-
-[node name="Sprite2D" parent="Bounce Pad2" index="0"]
-texture = SubResource("GradientTexture2D_hf5sm")
-
-[node name="CollisionShape2D" parent="Bounce Pad2" index="1"]
-shape = SubResource("RectangleShape2D_awidu")
-
-[node name="Bounce Pad3" parent="." instance=ExtResource("4_57764")]
-position = Vector2(1469, 106)
-
-[node name="Sprite2D" parent="Bounce Pad3" index="0"]
-texture = SubResource("GradientTexture2D_hf5sm")
-
-[node name="CollisionShape2D" parent="Bounce Pad3" index="1"]
-shape = SubResource("RectangleShape2D_awidu")
-
-[node name="Walls" type="StaticBody2D" parent="."]
-
-[node name="Left" type="CollisionShape2D" parent="Walls"]
-position = Vector2(-107, 536.5)
-shape = SubResource("RectangleShape2D_mwdqx")
-
-[node name="Right" type="CollisionShape2D" parent="Walls"]
-position = Vector2(2026, 599.5)
-shape = SubResource("RectangleShape2D_p8803")
-
-[node name="Top" type="CollisionShape2D" parent="Walls"]
-position = Vector2(960, -123.5)
-shape = SubResource("RectangleShape2D_3etsy")
-
-[editable path="Bounce Pad"]
-[editable path="Bounce Pad2"]
-[editable path="Bounce Pad3"]
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 646.0
+offset_right = 1854.0
+offset_bottom = 1074.0
+text = "If you land in your launcher,
+press Space or Click to launch again."
+label_settings = ExtResource("4_ob4db")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -3,24 +3,27 @@ class_name TrajectoryHint extends Node2D
 ## Intended for use with the ball class, but not limited to just that case.
 
 
-# user settings for trajectory hint
 ## Number of dots displayed in the trajectory hint.
 @export var number_of_dots: int = 15
+
 ## The largest radius of the dots in the trajectory hint.
 @export var dot_radius: float = 5.0
+
 ## How long it takes (in seconds) for the projectile to get from one dot to the
 ## next.
 @export_range(0, 0.2, 0.001, "suffix:sec") var dot_time_separation: float = 0.1
+
 ## Toggles whether or not the trajectory hint is drawn.
 @export var enabled: bool = true
 
 
-# settings set by parent
 ## Set by the parent. Used for computing the trajectory.
 ## Expected in global coordinates.
-var linear_velocity: Vector2 # expected in global coordinates
+var linear_velocity: Vector2
+
 ## Set by the parent. Used for computing the trajectory.
 var linear_damp: float
+
 ## Set by the parent.
 ## When true, the dots in the projectile hint do not move.
 ## When false, the dots in the projectile hint move toward the ball, so if the
@@ -28,14 +31,13 @@ var linear_damp: float
 var frozen: bool
 
 
-# parameters from project settings
 # Gravity vector in global coordinates.
 var _gravity_vector: Vector2 = Vector2.DOWN * ProjectSettings.get_setting("physics/2d/default_gravity")
 # Default linear damping. Used for computing combined (total) linear damping.
 var _default_linear_damp: float = ProjectSettings.get_setting("physics/2d/default_linear_damp")
 
 
-# Time that this node has existed for while [frozen] is false.
+# Time that this node has existed for while not [frozen].
 var _game_time: float = 0.0
 
 
@@ -52,8 +54,9 @@ func _process(delta: float):
 	_frozen_last_frame = frozen
 
 
-# draw the trajectory hint
 func _draw():
+	# draw the trajectory hint
+	
 	# only draw if enabled
 	if not enabled:
 		return
@@ -74,18 +77,19 @@ func _draw():
 		var c = t * _gravity_vector / combined_damp
 		var delta_x = a*b + c
 		
-		# compute remaining values needed
-		var draw_radius = dot_radius * (dot_time_separation+1) / (t+1)
-		var color = Color(0.662745, 0.662745, 0.662745, _dot_t_to_alpha(t))
-		
 		# delta_x is in global coordinates, so we need to convert it to local
 		delta_x = delta_x.rotated(-global_rotation)
+		
+		# compute values for dot appearance
+		var draw_radius = dot_radius * (dot_time_separation+1) / (t+1)
+		var color = Color(0.662745, 0.662745, 0.662745, _dot_t_to_alpha(t))
 		
 		# draw the dot
 		draw_circle(delta_x, draw_radius, color)
 
 
-# Computes the alpha of each dot.
+# Computes the alpha of each dot
+# from the time it takes for the ball to reach it.
 func _dot_t_to_alpha(t: float) -> float:
 	var max_dot_time = number_of_dots * dot_time_separation
 	t -= dot_time_separation

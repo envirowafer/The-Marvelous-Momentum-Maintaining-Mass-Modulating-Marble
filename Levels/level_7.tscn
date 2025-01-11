@@ -1,69 +1,78 @@
-[gd_scene load_steps=10 format=4 uid="uid://ckjfys7leug2"]
+[gd_scene load_steps=12 format=4 uid="uid://bs133t4tp4s4s"]
 
-[ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_sim0o"]
-[ext_resource type="PackedScene" uid="uid://cfvplvrfdj7bx" path="res://Components/launcher.tscn" id="2_wfuak"]
-[ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_kodv4"]
+[ext_resource type="PackedScene" uid="uid://bqd68oocae336" path="res://Components/killzone.tscn" id="1_vg1gc"]
+[ext_resource type="PackedScene" uid="uid://cfvplvrfdj7bx" path="res://Components/launcher.tscn" id="2_w4nqn"]
+[ext_resource type="PackedScene" uid="uid://bjjxik0k54mxl" path="res://Components/tile_map_layer.tscn" id="3_yfnfa"]
+[ext_resource type="PackedScene" uid="uid://cm5pdcoc6ugrm" path="res://Components/bounce_pad.tscn" id="4_t2ucp"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_6w6xa"]
-font_size = 70
-font_color = Color(0.858824, 0.768627, 0.611765, 1)
+[sub_resource type="Gradient" id="Gradient_qs31s"]
+colors = PackedColorArray(0.431373, 0.137255, 0.129412, 1, 0.431373, 0.137255, 0.129412, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvjw2"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nd0lp"]
+gradient = SubResource("Gradient_qs31s")
+width = 334
+height = 89
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f71yw"]
+resource_local_to_scene = true
+size = Vector2(334, 89.4161)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0nln"]
 resource_local_to_scene = true
 size = Vector2(334, 1080)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rll4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3muo"]
+size = Vector2(332, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbo88"]
+size = Vector2(332, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1n6wu"]
 size = Vector2(2470, 367)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_di8ur"]
-size = Vector2(60, 480)
+[node name="Level 5" type="Node2D"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4sxv"]
-size = Vector2(342, 300)
+[node name="Killzone" parent="." instance=ExtResource("1_vg1gc")]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8n80"]
-size = Vector2(342, 600)
+[node name="Launcher" parent="." instance=ExtResource("2_w4nqn")]
+position = Vector2(428, 608)
+rotation = 0.523599
 
-[node name="Level 7" type="Node2D"]
+[node name="TileMapLayer" parent="." instance=ExtResource("3_yfnfa")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAfAAEAAAAAAAAAAAAfAAIAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAUAAAAAAAAAAAAfAAsAAQAAAAAAAQAfAA0AAAAAAAAAAAAfAA4AAAAAAAAAAAAfAA8AAAAAAAAAAAAfABAAAAAAAAAAAAAfABEAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAgAAAAAAAAAAAAfAAkAAAAAAAAAAAAfAAcAAAAAAAAAAAAOAAcAAgAAAAAAAQAOAAgAAgAAAAAAAQAOAAkAAgAAAAAAAQAOAAoAAgAAAAAAAQAOAAsAAgAAAAAAAQAOAAwAAgAAAAAAAQAOAA0AAgAAAAAAAQATAA0AAgAAAAAAAQATAAwAAgAAAAAAAQATAAsAAgAAAAAAAQATAAoAAgAAAAAAAQATAAkAAgAAAAAAAQATAAgAAgAAAAAAAQATAAcAAgAAAAAAAQATAAYAAgAAAAAAAQATAAUAAgAAAAAAAQATAAQAAgAAAAAAAQATAAMAAgAAAAAAAQATAAIAAgAAAAAAAQATAAEAAgAAAAAAAQAOAA4AAgAAAAAAAQAOAA8AAgAAAAAAAQAOABAAAgAAAAAAAQAOABEAAgAAAAAAAQAOAAYAAgAAAAAAAQAOAAUAAgAAAAAAAQA=")
 
-[node name="Killzone" parent="." instance=ExtResource("1_sim0o")]
+[node name="Bounce Pad" parent="." instance=ExtResource("4_t2ucp")]
+position = Vector2(1020, 1000)
+rotation = 0.47822
 
-[node name="Launcher" parent="." instance=ExtResource("2_wfuak")]
-position = Vector2(323, 866)
-launch_impulse_magnitude = 1700.0
+[node name="Sprite2D" parent="Bounce Pad" index="0"]
+position = Vector2(0, 15.708)
+texture = SubResource("GradientTexture2D_nd0lp")
 
-[node name="TileMapLayer" parent="." instance=ExtResource("3_kodv4")]
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAfAAEAAAAAAAAAAAAfAAIAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAsAAAAAAAAAAAAfAAwAAAAAAAAAAAAfAA0AAAAAAAAAAAAfAA4AAAAAAAAAAAAfAA8AAAAAAAAAAAAfABAAAAAAAAAAAAAfABEAAAAAAAAAAAAfAAYAAQAAAAAAAQAfAAoAAAAAAAAAAAAfAAgAAAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAAQAAAAAAAAAAAAQAAUAAAAAAAAAAAAQAAYAAAAAAAAAAAAQAAcAAAAAAAAAAAAfAAkAAAAAAAAAAAA=")
+[node name="CollisionShape2D" parent="Bounce Pad" index="1"]
+visible = false
+position = Vector2(0, 15.7081)
+shape = SubResource("RectangleShape2D_f71yw")
 
-[node name="Label" type="Label" parent="."]
-z_index = -1
-offset_left = 714.0
-offset_top = 866.0
-offset_right = 1640.0
-offset_bottom = 962.0
-text = "Can you go higher?"
-label_settings = SubResource("LabelSettings_6w6xa")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounce Pad"]
+polygon = PackedVector2Array(-167.728, 61.0356, -167.256, -29.3181, 167.296, -29.2738, 433.507, 99.6832, -24.0112, 316.564)
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
 [node name="Left" type="CollisionShape2D" parent="Walls"]
 position = Vector2(-107, 536.5)
-shape = SubResource("RectangleShape2D_jvjw2")
+shape = SubResource("RectangleShape2D_w0nln")
+
+[node name="Right Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2026, 300)
+shape = SubResource("RectangleShape2D_t3muo")
+
+[node name="Right Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2026, 930)
+shape = SubResource("RectangleShape2D_sbo88")
 
 [node name="Top" type="CollisionShape2D" parent="Walls"]
 position = Vector2(960, -123.5)
-shape = SubResource("RectangleShape2D_3rll4")
+shape = SubResource("RectangleShape2D_1n6wu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
-position = Vector2(990, 240)
-shape = SubResource("RectangleShape2D_di8ur")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
-position = Vector2(2031, 149.5)
-shape = SubResource("RectangleShape2D_g4sxv")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
-position = Vector2(2031, 780)
-shape = SubResource("RectangleShape2D_j8n80")
+[editable path="Bounce Pad"]

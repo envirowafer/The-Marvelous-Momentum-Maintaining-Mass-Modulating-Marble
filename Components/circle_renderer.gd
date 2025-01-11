@@ -10,12 +10,11 @@ class_name CircleRenderer extends Node2D
 @export_color_no_alpha var ball_color := Color(0.75, 0.65, 0.65)
 
 
-# redraw the sprite every frame
 func _process(_delta: float):
+	# redraw the sprite
 	queue_redraw()
 
 
-# draw a custom sprite that scales with the radius
 func _draw():
-	# draw filled circle
+	# draw filled circle that scales with the radius
 	draw_circle(Vector2.ZERO, radius, ball_color)

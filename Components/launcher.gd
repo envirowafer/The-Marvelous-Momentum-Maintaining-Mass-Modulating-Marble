@@ -9,8 +9,8 @@ class_name Launcher extends Node2D
 ## Reference to this launcher's ball.
 @onready var ball: Ball = $Ball
 
-# setter may be called via global group for screen transitions
 ## Variable for enabling and disabling input for the ball.
+## Setter may be called via global group for screen transitions.
 var input_enabled: bool = true:
 	set(value):
 		input_enabled = value
@@ -22,12 +22,13 @@ var input_enabled: bool = true:
 @onready var _launch_area: Area2D = $"Launch Area"
 @onready var _launch_cooldown: Timer = $"Launch Cooldown"
 
-# used for implementing launch cooldown
+# Used for implementing launch cooldown.
 var _can_launch: float = true
 
-# compute local and global vectors for impulse applied to ball
-@onready var _local_launch_impulse = launch_impulse_magnitude * Vector2.UP
-@onready var _global_launch_impulse = _local_launch_impulse.rotated(global_rotation)
+# Local impulse vector applied to ball.
+@onready var _local_launch_impulse: Vector2 = launch_impulse_magnitude * Vector2.UP
+# Global impulse vector applied to ball.
+@onready var _global_launch_impulse: Vector2 = _local_launch_impulse.rotated(global_rotation)
 
 
 func _ready():
@@ -46,8 +47,9 @@ func _process(_delta: float):
 				body.trajectory_hint.enabled = true
 
 
-# launch the ball when the player does the launch action
 func _input(event: InputEvent):
+	# launch the ball when the player does the launch action
+	
 	# check for user input
 	if input_enabled and event.is_action_pressed("activate_launcher"):
 		# stop if launching is currently disabled
@@ -71,6 +73,6 @@ func _input(event: InputEvent):
 				body.apply_impulse(_global_launch_impulse)
 
 
-# allow launching when cooldown is up
+# Allow launching when cooldown is up.
 func _on_launch_cooldown_timeout():
 	_can_launch = true

@@ -58,15 +58,14 @@ var launch_impulse: Vector2
 var is_input_enabled: bool = true
 
 
-# settings for mouse control of radius
 ## The most the radius can change in a frame.
 const MAX_RADIUS_DELTA: float = 5.0
 
 # The amount that mouse movement changes the radius.
 var _mouse_sensitivity: float = 0.05
 
-# This method is called by a global group.
 ## Set the mouse sensitivity to a particular value. The default is 1.
+## This method is called by a global group.
 func set_mouse_sensitivity(value: float):
 	_mouse_sensitivity = 0.05 * value
 
@@ -89,10 +88,10 @@ var radius: float = DEFAULT_RADIUS:
 		mass = new_mass
 		linear_velocity = new_linear_velocity
 
-# we can't have the radius change too fast,
+# We can't have the radius change too fast,
 # so instead of the player controlling the radius directly,
 # the player controls this target radius
-# that the actual radius will move toward every physics frame
+# that the actual radius will move toward every frame or physics frame.
 var _target_radius: float = radius
 
 # Computes the ball's mass from its radius.
@@ -101,11 +100,9 @@ func _radius_to_mass(r: float) -> float:
 	return DEFAULT_MASS * scale_factor**2
 
 
-# sprite and collider
 @onready var _circle_renderer: CircleRenderer = $"Circle Renderer"
 @onready var _collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-# sounds
 @onready var _bounce_sound: AudioStreamPlayer2D = $Sounds/Bounce
 @onready var _roll_sound: AudioStreamPlayer2D = $Sounds/Roll
 @onready var _fall_sound: AudioStreamPlayer2D = $Sounds/Fall
@@ -185,7 +182,7 @@ func _integrate_forces(_state):
 		_is_launch_queued = false
 
 
-# use mouse input to change the target radius
+# Use mouse input to change the target radius.
 func _unhandled_input(event):
 	if is_input_enabled and event is InputEventMouseMotion:
 		var delta_radius = _mouse_sensitivity * event.screen_relative.y
@@ -195,7 +192,7 @@ func _unhandled_input(event):
 			_target_radius = r
 
 
-# play sound effect when colliding with walls
+# Play sound effect when colliding with walls.
 func _on_body_entered(_body: Node):
 	var speed = linear_velocity.length()
 	_bounce_sound.play_with_parameters(speed, mass)
