@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/level_0.gd" id="1_i1w0g"]
 [ext_resource type="PackedScene" uid="uid://dwt502xv6uxcw" path="res://Components/ball.tscn" id="2_hrx6q"]
-[ext_resource type="Texture2D" uid="uid://b5mu8510s5bsk" path="res://mid-wood-texture.tres" id="3_q5pbi"]
+[ext_resource type="Texture2D" uid="uid://b5mu8510s5bsk" path="res://Components/mid-wood-texture.tres" id="3_q5pbi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1d70k"]
 size = Vector2(480, 360)

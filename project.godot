@@ -13,7 +13,7 @@ config_version=5
 config/name="(post-jam) The Marvelous Momentum-Maintaining Mass-Modulating Marble"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.png"
+config/icon="res://Icons/icon.png"
 
 [display]
 

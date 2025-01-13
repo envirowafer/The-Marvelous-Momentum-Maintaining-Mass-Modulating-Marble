@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=11 format=3 uid="uid://cu6a4ysqhdirc"]
 
-[ext_resource type="Texture2D" uid="uid://b5mu8510s5bsk" path="res://mid-wood-texture.tres" id="1_5431h"]
+[ext_resource type="Texture2D" uid="uid://b5mu8510s5bsk" path="res://Components/mid-wood-texture.tres" id="1_5431h"]
 [ext_resource type="PackedScene" uid="uid://cyrvodmhlcrm2" path="res://Components/exit.tscn" id="2_juv0l"]
 [ext_resource type="PackedScene" uid="uid://c7vtacmi7siag" path="res://Components/exit_up.tscn" id="3_xxb6v"]
 [ext_resource type="PackedScene" uid="uid://bl17gi2788ao5" path="res://Components/kill_tile.tscn" id="4_0lmpa"]

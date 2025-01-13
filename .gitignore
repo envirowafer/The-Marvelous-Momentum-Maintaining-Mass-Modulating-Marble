@@ -1,3 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Temporary files
+.tmp/
+
+# Project icon
+.ico/
